@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Group } from '../../group/entity/group.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Student {
@@ -16,4 +17,7 @@ export class Student {
 
   @Column()
   phone: string;
+
+  @ManyToOne(() => Group, (group) => group.students)
+  group: Group;
 }

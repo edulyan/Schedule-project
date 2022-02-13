@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Group } from '../../group/entity/group.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Teacher {
@@ -19,4 +26,8 @@ export class Teacher {
 
   @Column()
   phone: string;
+
+  @ManyToMany(() => Group, (group) => group.teachers, { eager: true })
+  @JoinTable({ name: 'teacher_groups' })
+  group: Group[];
 }
