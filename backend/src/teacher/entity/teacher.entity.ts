@@ -1,4 +1,3 @@
-import { Group } from '../../group/entity/group.entity';
 import {
   Column,
   Entity,
@@ -6,6 +5,8 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Group } from '../../group/entity/group.entity';
+import { Role } from '../../role/entity/role.entity';
 
 @Entity()
 export class Teacher {
@@ -30,4 +31,8 @@ export class Teacher {
   @ManyToMany(() => Group, (group) => group.teachers, { eager: true })
   @JoinTable({ name: 'teacher_groups' })
   group: Group[];
+
+  @ManyToMany(() => Role, (role) => role.teachers, { eager: true })
+  @JoinTable({ name: 'teacher_roles' })
+  roles: Role[];
 }

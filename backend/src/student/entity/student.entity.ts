@@ -1,5 +1,13 @@
 import { Group } from '../../group/entity/group.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Role } from '../../role/entity/role.entity';
 
 @Entity()
 export class Student {
@@ -20,4 +28,8 @@ export class Student {
 
   @ManyToOne(() => Group, (group) => group.students)
   group: Group;
+
+  @ManyToMany(() => Role, (role) => role.students, { eager: true })
+  @JoinTable({ name: 'student_roles' })
+  roles: Role[];
 }
