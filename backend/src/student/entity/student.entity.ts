@@ -30,6 +30,6 @@ export class Student {
   group: Group;
 
   @ManyToMany(() => Role, (role) => role.students, { eager: true })
-  @JoinTable({ name: 'student_roles' })
+  @JoinTable({ name: 'student_role' })
   roles: Role[];
 }

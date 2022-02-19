@@ -8,6 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Teacher } from '../../teacher/entity/teacher.entity';
+import { Lesson } from '../../lesson/entity/lesson.entity';
+import { Subject } from '../../subject/entity/subject.entity';
 
 @Entity()
 export class Group {
@@ -23,4 +25,12 @@ export class Group {
   @ManyToMany(() => Teacher, (teacher) => teacher.group)
   @JoinColumn()
   teachers: Teacher[];
+
+  @ManyToMany(() => Lesson, (lesson) => lesson.groups)
+  @JoinColumn()
+  lessons: Lesson[];
+
+  @ManyToMany(() => Subject, (subject) => subject.groups)
+  @JoinColumn()
+  subjects: Subject[];
 }
