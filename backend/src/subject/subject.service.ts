@@ -18,6 +18,11 @@ export class SubjectService {
     return await this.subjectRepository.findOne(id);
   }
 
+  async getTitle(title: string): Promise<Subject> {
+    const userName = await this.subjectRepository.findOne({ title });
+    return userName;
+  }
+
   async create(subject: CreateSubjectDto): Promise<Subject> {
     const newSubject = this.subjectRepository.create(subject);
     return await this.subjectRepository.save(newSubject);

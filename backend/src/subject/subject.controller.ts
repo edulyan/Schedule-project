@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateSubjectDto } from './dto/createSubject.dto';
+import { Subject } from './entity/subject.entity';
 import { SubjectService } from './subject.service';
 
 @Controller('subject')
@@ -12,17 +13,22 @@ export class SubjectController {
   }
 
   @Get(':id')
-  async getById(id: number) {
+  async getById(@Param('id') id: number) {
     return await this.subjectService.getById(id);
   }
 
+  @Post(':title')
+  async getTitle(@Param('title') title: string) {
+    return await this.subjectService.getTitle(title);
+  }
+
   @Post()
-  async create(subject: CreateSubjectDto) {
+  async create(@Body() subject: CreateSubjectDto): Promise<Subject> {
     return await this.subjectService.create(subject);
   }
 
   @Delete(':id')
-  async delete(id: number) {
+  async delete(@Param('id') id: number) {
     return await this.subjectService.remove(id);
   }
 }
