@@ -7,14 +7,9 @@ import { RoleService } from './role.service';
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
-  @Get()
-  async getAll(): Promise<Role[]> {
-    return await this.roleService.getAll();
-  }
-
-  @Get(':id')
-  async getById(@Param('id') id: number): Promise<Role> {
-    return await this.roleService.getById(id);
+  @Get(':value')
+  async getById(@Param('value') value: string): Promise<Role> {
+    return await this.roleService.getRoleByValue(value);
   }
 
   @Post()

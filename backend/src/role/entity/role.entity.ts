@@ -1,12 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Student } from '../../student/entity/student.entity';
-import { Teacher } from '../../teacher/entity/teacher.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Role {
@@ -15,12 +7,4 @@ export class Role {
 
   @Column()
   name: string;
-
-  @ManyToMany(() => Student, (student) => student.roles)
-  @JoinColumn()
-  students: Student[];
-
-  @ManyToMany(() => Teacher, (teacher) => teacher.roles)
-  @JoinColumn()
-  teachers: Teacher[];
 }

@@ -4,6 +4,7 @@ import {
   Entity,
   JoinColumn,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -22,15 +23,6 @@ export class Group {
   @OneToMany(() => Student, (student) => student.group)
   students: Student[];
 
-  @ManyToMany(() => Teacher, (teacher) => teacher.group)
-  @JoinColumn()
-  teachers: Teacher[];
-
-  @ManyToMany(() => Lesson, (lesson) => lesson.groups)
-  @JoinColumn()
+  @OneToMany(() => Lesson, (lesson) => lesson.group)
   lessons: Lesson[];
-
-  @ManyToMany(() => Subject, (subject) => subject.groups)
-  @JoinColumn()
-  subjects: Subject[];
 }

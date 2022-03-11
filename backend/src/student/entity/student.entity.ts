@@ -1,12 +1,12 @@
-import { Group } from '../../group/entity/group.entity';
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
+  JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Group } from '../../group/entity/group.entity';
 import { Role } from '../../role/entity/role.entity';
 
 @Entity()
@@ -21,6 +21,9 @@ export class Student {
   lastname: string;
 
   @Column()
+  password: string;
+
+  @Column()
   email: string;
 
   @Column()
@@ -29,7 +32,7 @@ export class Student {
   @ManyToOne(() => Group, (group) => group.students)
   group: Group;
 
-  @ManyToMany(() => Role, (role) => role.students, { eager: true })
-  @JoinTable({ name: 'student_role' })
-  roles: Role[];
+  @OneToOne(() => Role)
+  @JoinColumn()
+  role: Role;
 }

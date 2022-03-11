@@ -1,9 +1,11 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Group } from '../../group/entity/group.entity';
@@ -23,6 +25,9 @@ export class Teacher {
   lastname: string;
 
   @Column()
+  password: string;
+
+  @Column()
   department: string;
 
   @Column()
@@ -31,18 +36,14 @@ export class Teacher {
   @Column()
   phone: string;
 
-  @ManyToMany(() => Group, (group) => group.teachers, { eager: true })
-  @JoinTable({ name: 'teacher_groups' })
-  group: Group[];
+  @OneToOne(() => Role)
+  @JoinColumn()
+  role: Role;
 
-  @ManyToMany(() => Role, (role) => role.teachers, { eager: true })
-  @JoinTable({ name: 'teacher_roles' })
-  roles: Role[];
+  @OneToMany(() => Lesson, (lesson) => lesson.teacher)
+  lessons: Lesson[];
 
   @ManyToMany(() => Subject, (subject) => subject.teachers, { eager: true })
   @JoinTable({ name: 'teacher_subjects' })
   subjects: Subject[];
-
-  @OneToMany(() => Lesson, (lesson) => lesson.teacher)
-  lessons: Lesson[];
 }
