@@ -22,7 +22,10 @@ export class StudentService {
   }
 
   async getByEmail(email: string): Promise<Student> {
-    return await this.studentRepository.findOne(email);
+    const findEmail = await this.studentRepository.findOne({
+      where: { email },
+    });
+    return findEmail;
   }
 
   async create(studentDto: CreateStudentDto): Promise<Student> {

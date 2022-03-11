@@ -18,6 +18,13 @@ export class TeacherService {
     return await this.teacherRepository.findOne(id);
   }
 
+  async getByEmail(email: string): Promise<Teacher> {
+    const findEmail = await this.teacherRepository.findOne({
+      where: { email },
+    });
+    return findEmail;
+  }
+
   async create(teacherDto: CreateTeacherDto): Promise<Teacher> {
     const teacher = this.teacherRepository.create(teacherDto);
     return await this.teacherRepository.save(teacher);

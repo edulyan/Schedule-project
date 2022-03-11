@@ -24,6 +24,11 @@ export class StudentController {
     return this.studentService.getById(id);
   }
 
+  @Get('email/:email')
+  async getByEmail(@Param('email') email: string) {
+    return await this.studentService.getByEmail(email);
+  }
+
   @Post()
   async create(@Body() studentDto: CreateStudentDto) {
     return this.studentService.create(studentDto);
