@@ -11,6 +11,8 @@ import { StudentService } from '../student/student.service';
 import { TeacherService } from '../teacher/teacher.service';
 import { Student } from '../student/entity/student.entity';
 import { Teacher } from '../teacher/entity/teacher.entity';
+import { LoginStudentDto } from '../student/dto/loginStudent.dto';
+import { LoginTeacherDto } from '../teacher/dto/loginTeacher.dto';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -21,13 +23,13 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async loginStudent(studentDto: CreateStudentDto) {
-    const student = await this.validateStudent(studentDto);
+  async loginStudent(logStudentDto: LoginStudentDto) {
+    const student = await this.validateStudent(logStudentDto);
     return this.generateTokenStudent(student);
   }
 
-  async loginTeacher(teacherDto: CreateTeacherDto) {
-    const teacher = await this.validateTeacher(teacherDto);
+  async loginTeacher(logTeacherDto: LoginTeacherDto) {
+    const teacher = await this.validateTeacher(logTeacherDto);
     return this.generateTokenTeacher(teacher);
   }
 
@@ -92,10 +94,10 @@ export class AuthService {
     };
   }
 
-  async validateStudent(studentDto: CreateStudentDto) {
-    const student = await this.studentService.getByEmail(studentDto.email);
+  async validateStudent(logStudentDto: LoginStudentDto) {
+    const student = await this.studentService.getByEmail(logStudentDto.email);
     const passCheck = await bcrypt.compare(
-      studentDto.password,
+      logStudentDto.password,
       student.password,
     );
 
@@ -108,10 +110,10 @@ export class AuthService {
     }
   }
 
-  async validateTeacher(teacherDto: CreateTeacherDto) {
-    const teacher = await this.teacherService.getByEmail(teacherDto.email);
+  async validateTeacher(logTeacherDto: LoginTeacherDto) {
+    const teacher = await this.teacherService.getByEmail(logTeacherDto.email);
     const passCheck = await bcrypt.compare(
-      teacherDto.password,
+      logTeacherDto.password,
       teacher.password,
     );
 
