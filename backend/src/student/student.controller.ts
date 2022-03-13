@@ -34,6 +34,14 @@ export class StudentController {
     return this.studentService.create(studentDto);
   }
 
+  @Post('/addRoleToStudent/:studentId/:roleId')
+  async addRole(
+    @Param('studentId') studentId: number,
+    @Param('roleId') roleId: number,
+  ) {
+    return await this.studentService.addRole(studentId, roleId);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return this.studentService.remove(id);

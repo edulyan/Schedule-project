@@ -10,6 +10,10 @@ export class RoleService {
     @InjectRepository(Role) private roleRepository: Repository<Role>,
   ) {}
 
+  async getById(id: number): Promise<Role> {
+    return await this.roleRepository.findOne(id);
+  }
+
   async getRoleByValue(value: string): Promise<Role> {
     const role = await this.roleRepository.findOne({ where: { value } });
     return role;

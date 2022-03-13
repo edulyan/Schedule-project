@@ -8,7 +8,7 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Get(':value')
-  async getById(@Param('value') value: string): Promise<Role> {
+  async getByValue(@Param('value') value: string): Promise<Role> {
     return await this.roleService.getRoleByValue(value);
   }
 

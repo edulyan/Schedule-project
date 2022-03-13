@@ -30,9 +30,18 @@ export class StudentService {
 
   async create(studentDto: CreateStudentDto): Promise<Student> {
     const student = this.studentRepository.create(studentDto);
-
-    const role = getConnection().getRepository(Role);
     return await this.studentRepository.save(student);
+  }
+
+  async addRole(studentId: number, roleId: number): Promise<Student> {
+    const studentTarget = await this.getById(studentId);
+    const roleTarget = await this.roleService.getById(roleId);
+
+    studentTarget.role = roleTarget;
+
+    await this.studentRepository.save(studentTarget);
+
+    return studentTarget;
   }
 
   async remove(id: number): Promise<void> {
