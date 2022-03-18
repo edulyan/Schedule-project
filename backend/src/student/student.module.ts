@@ -6,11 +6,16 @@ import { Student } from './entity/student.entity';
 import { StudentController } from './student.controller';
 import { StudentService } from './student.service';
 import { RoleModule } from '../role/role.module';
+import { GroupModule } from '../group/group.module';
 
 @Module({
   controllers: [StudentController],
   providers: [StudentService],
-  imports: [RoleModule, TypeOrmModule.forFeature([Student, Group, Role])],
+  imports: [
+    RoleModule,
+    GroupModule,
+    TypeOrmModule.forFeature([Student, Group, Role]),
+  ],
   exports: [StudentService],
 })
 export class StudentModule {}

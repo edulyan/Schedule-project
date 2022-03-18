@@ -8,7 +8,7 @@ export class Lesson {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'timestamp' })
   time: string;
 
   @Column()

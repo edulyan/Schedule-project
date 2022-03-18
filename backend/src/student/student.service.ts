@@ -5,20 +5,26 @@ import { RoleService } from '../role/role.service';
 import { getConnection, Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { Student } from './entity/student.entity';
+import { GroupService } from '../group/group.service';
+import { Group } from '../group/entity/group.entity';
 
 @Injectable()
 export class StudentService {
   constructor(
     @InjectRepository(Student) private studentRepository: Repository<Student>,
+    @InjectRepository(Group) private groupRepository: Repository<Group>,
     private readonly roleService: RoleService,
+    private readonly groupService: GroupService,
   ) {}
 
   async getAll(): Promise<Student[]> {
-    return await this.studentRepository.find();
+    return await this.studentRepository.find({ relations: ['role', 'group'] });
   }
 
   async getById(id: number): Promise<Student> {
-    return await this.studentRepository.findOne(id);
+    return await this.studentRepository.findOne(id, {
+      relations: ['role', 'group'],
+    });
   }
 
   async getByEmail(email: string): Promise<Student> {
@@ -38,6 +44,17 @@ export class StudentService {
     const roleTarget = await this.roleService.getById(roleId);
 
     studentTarget.role = roleTarget;
+
+    await this.studentRepository.save(studentTarget);
+
+    return studentTarget;
+  }
+
+  async addGroup(studentId: number, groupId: number): Promise<Student> {
+    const studentTarget = await this.getById(studentId);
+    const groupTarget = await this.groupService.getById(groupId);
+
+    studentTarget.group = groupTarget;
 
     await this.studentRepository.save(studentTarget);
 

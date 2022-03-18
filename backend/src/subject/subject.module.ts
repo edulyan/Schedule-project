@@ -10,5 +10,6 @@ import { Lesson } from '../lesson/entity/lesson.entity';
   providers: [SubjectService],
   controllers: [SubjectController],
   imports: [TypeOrmModule.forFeature([Subject, Lesson, Teacher])],
+  exports: [SubjectService],
 })
 export class SubjectModule {}

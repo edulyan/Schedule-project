@@ -21,6 +21,30 @@ export class LessonController {
     return await this.lessonService.create(lesson);
   }
 
+  @Post('/addGroupToLesson/:lessonId/:groupId')
+  async addGroup(
+    @Param('lessonId') teacherId: number,
+    @Param('groupId') groupId: number,
+  ) {
+    return await this.lessonService.addGroup(teacherId, groupId);
+  }
+
+  @Post('/addSubjectToLesson/:lessonId/:subjectId')
+  async addSubject(
+    @Param('lessonId') lessonId: number,
+    @Param('subjectId') subjectId: number,
+  ) {
+    return await this.lessonService.addSubject(lessonId, subjectId);
+  }
+
+  @Post('/addTeacherToLesson/:lessonId/:teacherId')
+  async addTeacher(
+    @Param('lessonId') lessonId: number,
+    @Param('teacherId') teacherId: number,
+  ) {
+    return await this.lessonService.addTeacher(lessonId, teacherId);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return await this.lessonService.remove(id);

@@ -8,7 +8,6 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Group } from '../../group/entity/group.entity';
 import { Role } from '../../role/entity/role.entity';
 import { Lesson } from '../../lesson/entity/lesson.entity';
 import { Subject } from '../../subject/entity/subject.entity';

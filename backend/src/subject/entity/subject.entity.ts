@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -20,5 +21,6 @@ export class Subject {
   lessons: Lesson[];
 
   @ManyToMany(() => Teacher, (teacher) => teacher.subjects)
+  @JoinColumn()
   teachers: Teacher[];
 }

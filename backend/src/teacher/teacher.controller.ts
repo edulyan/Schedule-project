@@ -21,6 +21,22 @@ export class TeacherController {
     return await this.teacherService.create(teacherDto);
   }
 
+  @Post('/addRoleToTeacher/:teacherId/:roleId')
+  async addRole(
+    @Param('teacherId') teacherId: number,
+    @Param('roleId') roleId: number,
+  ) {
+    return await this.teacherService.addRole(teacherId, roleId);
+  }
+
+  @Post('/addSubjectToTeacher/:teacherId/:subjectId')
+  async addSubject(
+    @Param('teacherId') teacherId: number,
+    @Param('subjectId') subjectId: number,
+  ) {
+    return await this.teacherService.addSubject(teacherId, subjectId);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return await this.teacherService.remove(id);
