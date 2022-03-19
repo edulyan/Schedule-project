@@ -66,6 +66,12 @@ export class LessonService {
     return lessonTarget;
   }
 
+  async update(id: number, lessonDto: CreateLessonDto): Promise<boolean> {
+    await this.lessonRepository.update(id, lessonDto);
+
+    return true;
+  }
+
   async remove(id: number): Promise<void> {
     await this.lessonRepository.delete(id);
   }

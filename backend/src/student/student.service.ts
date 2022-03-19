@@ -61,6 +61,12 @@ export class StudentService {
     return studentTarget;
   }
 
+  async update(id: number, studentDto: CreateStudentDto): Promise<boolean> {
+    await this.studentRepository.update(id, studentDto);
+
+    return true;
+  }
+
   async remove(id: number): Promise<void> {
     await this.studentRepository.delete(id);
   }

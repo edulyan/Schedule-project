@@ -50,6 +50,11 @@ export class StudentController {
     return await this.studentService.addGroup(studentId, groupId);
   }
 
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() studentDto: CreateStudentDto) {
+    return await this.studentService.update(id, studentDto);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return this.studentService.remove(id);

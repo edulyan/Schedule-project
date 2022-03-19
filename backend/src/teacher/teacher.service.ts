@@ -60,6 +60,12 @@ export class TeacherService {
     return true;
   }
 
+  async update(id: number, teacherDto: CreateTeacherDto): Promise<boolean> {
+    await this.teacherRepository.update(id, teacherDto);
+
+    return true;
+  }
+
   async remove(id: number): Promise<void> {
     await this.teacherRepository.delete(id);
   }
