@@ -1,4 +1,4 @@
 export class CreateLessonDto {
-  readonly title: string;
+  readonly time: string;
   readonly classroom: number;
 }
