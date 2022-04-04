@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/createGroup.dto';
@@ -19,11 +19,17 @@ export class GroupService {
   }
 
   async create(groupDto: CreateGroupDto): Promise<Group> {
+    if (!groupDto) {
+      throw new BadRequestException('Title is required.');
+    }
+
     const group = this.groupRepository.create(groupDto);
     return await this.groupRepository.save(group);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<boolean> {
     await this.groupRepository.delete(id);
+
+    return true;
   }
 }

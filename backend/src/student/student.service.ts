@@ -12,7 +12,6 @@ import { Group } from '../group/entity/group.entity';
 export class StudentService {
   constructor(
     @InjectRepository(Student) private studentRepository: Repository<Student>,
-    @InjectRepository(Group) private groupRepository: Repository<Group>,
     private readonly roleService: RoleService,
     private readonly groupService: GroupService,
   ) {}

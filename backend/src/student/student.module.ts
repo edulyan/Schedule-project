@@ -12,9 +12,9 @@ import { GroupModule } from '../group/group.module';
   controllers: [StudentController],
   providers: [StudentService],
   imports: [
+    TypeOrmModule.forFeature([Student, Group, Role]),
     RoleModule,
     GroupModule,
-    TypeOrmModule.forFeature([Student, Group, Role]),
   ],
   exports: [StudentService],
 })
