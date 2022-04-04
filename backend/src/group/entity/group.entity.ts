@@ -8,9 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Teacher } from '../../teacher/entity/teacher.entity';
 import { Lesson } from '../../lesson/entity/lesson.entity';
-import { Subject } from '../../subject/entity/subject.entity';
 
 @Entity()
 export class Group {

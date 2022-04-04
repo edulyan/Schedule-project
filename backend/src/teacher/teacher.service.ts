@@ -49,7 +49,7 @@ export class TeacherService {
     return teacherTarget;
   }
 
-  async addSubject(teacherId: number, subjectId: number): Promise<boolean> {
+  async addSubject(teacherId: number, subjectId: number): Promise<Teacher> {
     const teacherTarget = await this.getById(teacherId);
     const subjectTarget = await this.subjectService.getById(subjectId);
 
@@ -57,13 +57,11 @@ export class TeacherService {
 
     await this.teacherRepository.save(teacherTarget);
 
-    return true;
+    return teacherTarget;
   }
 
-  async update(id: number, teacherDto: CreateTeacherDto): Promise<boolean> {
+  async update(id: number, teacherDto: CreateTeacherDto): Promise<void> {
     await this.teacherRepository.update(id, teacherDto);
-
-    return true;
   }
 
   async remove(id: number): Promise<void> {

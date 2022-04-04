@@ -28,10 +28,8 @@ export class SubjectService {
     return await this.subjectRepository.save(newSubject);
   }
 
-  async update(id: number, subject: CreateSubjectDto): Promise<boolean> {
+  async update(id: number, subject: CreateSubjectDto): Promise<void> {
     await this.subjectRepository.update(id, subject);
-
-    return true;
   }
 
   async remove(id: number): Promise<void> {
