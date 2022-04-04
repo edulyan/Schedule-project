@@ -32,7 +32,7 @@ export class Student {
   @ManyToOne(() => Group, (group) => group.students)
   group: Group;
 
-  @OneToOne(() => Role, (role) => role.student, { cascade: true })
+  @ManyToOne(() => Role, (role) => role.students)
   @JoinColumn()
   role: Role;
 }

@@ -4,6 +4,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -35,8 +36,7 @@ export class Teacher {
   @Column()
   phone: string;
 
-  @OneToOne(() => Role)
-  @JoinColumn()
+  @ManyToOne(() => Role, (role) => role.teachers)
   role: Role;
 
   @OneToMany(() => Lesson, (lesson) => lesson.teacher)
