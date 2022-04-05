@@ -17,7 +17,7 @@ export class RoleController {
     return await this.roleService.create(roleDto);
   }
 
-  @Delete()
+  @Delete(':id')
   async remove(@Param('id') id: number) {
     return await this.roleService.remove(id);
   }

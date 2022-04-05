@@ -23,52 +23,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async loginStudent(logStudentDto: LoginStudentDto) {
-    const student = await this.validateStudent(logStudentDto);
-    return this.generateTokenStudent(student);
-  }
-
-  async loginTeacher(logTeacherDto: LoginTeacherDto) {
-    const teacher = await this.validateTeacher(logTeacherDto);
-    return this.generateTokenTeacher(teacher);
-  }
-
-  async registrationStudent(studentDto: CreateStudentDto) {
-    const check = await this.studentService.getByEmail(studentDto.email);
-    if (check) {
-      throw new HttpException(
-        'Пользователь с таким email уже существует',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    const hashPassword = await bcrypt.hash(studentDto.password, 5);
-    const student = await this.studentService.create({
-      ...studentDto,
-      password: hashPassword,
-    });
-    return this.generateTokenStudent(student);
-  }
-
-  async registrationTeacher(teacherDto: CreateTeacherDto) {
-    const check = await this.teacherService.getByEmail(teacherDto.email);
-    if (check) {
-      throw new HttpException(
-        'Пользователь с таким email уже существует',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    const hashPassword = await bcrypt.hash(teacherDto.password, 5);
-    const teacher = await this.teacherService.create({
-      ...teacherDto,
-      password: hashPassword,
-    });
-    return this.generateTokenTeacher(teacher);
-  }
-
-  async generateTokenStudent(student: Student) {
-    const payload = await {
+  generateTokenStudent(student: Student) {
+    const payload = {
       email: student.email,
       id: student.id,
       group: student.group,
@@ -80,8 +36,8 @@ export class AuthService {
     };
   }
 
-  async generateTokenTeacher(teacher: Teacher) {
-    const payload = await {
+  generateTokenTeacher(teacher: Teacher) {
+    const payload = {
       email: teacher.email,
       id: teacher.id,
       subject: teacher.subjects,
@@ -124,5 +80,49 @@ export class AuthService {
         message: 'Некорректный email или пароль',
       });
     }
+  }
+
+  async loginStudent(logStudentDto: LoginStudentDto) {
+    const student = await this.validateStudent(logStudentDto);
+    return this.generateTokenStudent(student);
+  }
+
+  async loginTeacher(logTeacherDto: LoginTeacherDto) {
+    const teacher = await this.validateTeacher(logTeacherDto);
+    return this.generateTokenTeacher(teacher);
+  }
+
+  async registrationStudent(studentDto: CreateStudentDto) {
+    const check = await this.studentService.getByEmail(studentDto.email);
+    if (check) {
+      throw new HttpException(
+        'Пользователь с таким email уже существует',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const hashPassword = await bcrypt.hash(studentDto.password, 5);
+    const student = await this.studentService.create({
+      ...studentDto,
+      password: hashPassword,
+    });
+    return this.generateTokenStudent(student);
+  }
+
+  async registrationTeacher(teacherDto: CreateTeacherDto) {
+    const check = await this.teacherService.getByEmail(teacherDto.email);
+    if (check) {
+      throw new HttpException(
+        'Пользователь с таким email уже существует',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const hashPassword = await bcrypt.hash(teacherDto.password, 5);
+    const teacher = await this.teacherService.create({
+      ...teacherDto,
+      password: hashPassword,
+    });
+    return this.generateTokenTeacher(teacher);
   }
 }
