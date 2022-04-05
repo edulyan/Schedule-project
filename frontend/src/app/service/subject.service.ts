@@ -28,7 +28,7 @@ export class SubjectService {
     return this.http.get<ISubject>(`${this.URL_SUBJECT}/${title}`);
   }
 
-  public create(subjectDto: ICreateSubject): Observable<ISubject> {
+  public createSubject(subjectDto: ICreateSubject): Observable<ISubject> {
     return this.http.post<ISubject>(`${this.URL_SUBJECT}`, {
       subjectDto,
     });

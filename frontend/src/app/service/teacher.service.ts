@@ -24,7 +24,11 @@ export class TeacherService {
     return this.http.get<ITeacher>(`${this.URL_TEACHER}/${id}`);
   }
 
-  // public createTeacher() {}
+  public createTeacher(teacher: ICreateTeacher): Observable<ITeacher> {
+    return this.http.post<ITeacher>(`${this.URL_TEACHER}`, {
+      teacher,
+    });
+  }
 
   public addRole(teacherId: number, roleId: number): Observable<ITeacher> {
     return this.http.post<ITeacher>(
