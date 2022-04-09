@@ -1,0 +1,36 @@
+::ng-deep .mat-raised-button {
+  font-size: 80px !important;
+  height: 100px !important;
+  width: 500px !important;
+}
+
+.routes-admin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mat-list {
+    margin-bottom: 220px;
+    text-align: center;
+  }
+
+  .mat-list-item {
+    margin-top: 200px;
+  }
+}
+
+// .toRoute-admin-2 {
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   .mat-list {
+//     margin-bottom: 220px;
+//   }
+
+//   .mat-list-item {
+//     margin-top: 200px;
+//   }
+// }

@@ -1,14 +1,16 @@
-<!-- <video
+<video
   class="intro-media-video"
-  src="../../src/videos/cars_main.mp4"
+  src="./../../videos/cars_main.mp4"
+  src="./../../videos/cars_main.webm"
   autoplay
   muted
   loop
-></video> -->
+  playsinline
+></video>
 
 <div class="log-inputs">
   <div class="log-header">
-    <h1>Log In</h1>
+    <h1 class="header-auth">Log In</h1>
   </div>
 
   <div class="log-email">
@@ -40,9 +42,9 @@
     </mat-form-field>
   </div>
 
-  <section>
-    <div class="example-button-row">
-      <button mat-button target="_blank" color="primary">Enter</button>
-    </div>
-  </section>
+  <div class="auth-button-enter">
+    <button mat-raised-button color="warn" [routerLink]="['/user/schedule']">
+      Enter
+    </button>
+  </div>
 </div>

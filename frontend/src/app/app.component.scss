@@ -1,3 +1,8 @@
+::ng-deep .mat-icon {
+  font-size: 40px;
+  margin-right: 15px;
+}
+
 .main {
   .mat-toolbar {
     background-color: rgb(116, 102, 59);
@@ -10,15 +15,20 @@
     margin-top: 10px;
   }
 
-  .header-student {
-    margin-top: 10px;
-    position: relative;
-    left: 1000px;
-  }
+  // .header-student {
+  //   margin-top: 5px;
+  //   position: relative;
+  //   left: 1000px;
+  // }
 
-  .header-teacher {
-    margin-top: 10px;
+  // .header-teacher {
+  //   margin-top: 5px;
+  //   position: relative;
+  //   left: 1050px;
+  // }
+
+  .toolBar-button-exit {
     position: relative;
-    left: 1050px;
+    left: 1530px;
   }
 }

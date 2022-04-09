@@ -1,0 +1,59 @@
+<div class="routes-admin">
+  <div class="toRoute-admin-1">
+    <mat-list role="list-func-admin">
+      <mat-list-item role="listitem">
+        <div class="admin-home-button-createStudent">
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/admin/create/student']"
+          >
+            Студенты
+          </button>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <div class="admin-home-button-createTeacher">
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/admin/create/subject']"
+          >
+            Предметы
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div class="toRoute-admin-2">
+    <mat-list role="list-func-admin">
+      <mat-list-item role="listitem"
+        ><div class="admin-home-button-createStudent">
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/admin/create/teacher']"
+          >
+            Учителя
+          </button>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem"
+        ><div class="admin-home-button-createTeacher">
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/admin/create/group']"
+          >
+            Группы
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
