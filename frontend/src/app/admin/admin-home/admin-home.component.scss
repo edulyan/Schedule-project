@@ -10,6 +10,11 @@
   justify-content: center;
   align-items: center;
 
+  .mat-black {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+  }
+
   .mat-list {
     margin-bottom: 220px;
     text-align: center;
