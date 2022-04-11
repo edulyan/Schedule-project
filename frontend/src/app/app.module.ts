@@ -11,10 +11,10 @@ import { AdminHomeModule } from './admin/admin-home/admin-home.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { GroupTableModule } from './admin/admin-tables/group-table/group-table.module';
-import { StudentTableModule } from './admin/admin-tables/student-table/student-table.module';
-import { SubjecTabletModule } from './admin/admin-tables/subject-table/subject-table.module';
-import { TeacherTableModule } from './admin/admin-tables/teacher-table/teacher-table.module';
+import { GroupTableModule } from './admin/tables/group-table/group-table.module';
+import { StudentTableModule } from './admin/tables/student-table/student-table.module';
+import { SubjecTabletModule } from './admin/tables/subject-table/subject-table.module';
+import { TeacherTableModule } from './admin/tables/teacher-table/teacher-table.module';
 
 @NgModule({
   declarations: [AppComponent],

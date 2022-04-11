@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { GroupTableComponent } from './admin/admin-tables/group-table/group-table.component';
-import { StudentTableComponent } from './admin/admin-tables/student-table/student-table.component';
-import { SubjectTableComponent } from './admin/admin-tables/subject-table/subject-table.component';
-import { TeacherTableComponent } from './admin/admin-tables/teacher-table/teacher-table.component';
+import { GroupTableComponent } from './admin/tables/group-table/group-table.component';
+import { StudentTableComponent } from './admin/tables/student-table/student-table.component';
+import { SubjectTableComponent } from './admin/tables/subject-table/subject-table.component';
+import { TeacherTableComponent } from './admin/tables/teacher-table/teacher-table.component';
 import { AuthComponent } from './auth/auth.component';
 import { ScheduleComponent } from './user/schedule/schedule.component';
 
