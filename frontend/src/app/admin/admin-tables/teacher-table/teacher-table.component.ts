@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 
-export interface PeriodicElement {
+export interface ITeacher {
   id: number;
   firstname: string;
   lastname: string;
   password: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const teachers: ITeacher[] = [
   { id: 1, firstname: 'Hydrogen', lastname: '', password: '123' },
   { id: 2, firstname: 'Helium', lastname: '', password: '123' },
   { id: 3, firstname: 'Lithium', lastname: '', password: '123' },
@@ -22,11 +21,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-create-student',
-  templateUrl: './create-student.component.html',
-  styleUrls: ['./create-student.component.scss'],
+  selector: 'app-create-teacher',
+  templateUrl: './teacher-table.component.html',
+  styleUrls: ['./teacher-table.component.scss'],
 })
-export class CreateStudentComponent implements OnInit {
+export class TeacherTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
@@ -36,9 +35,10 @@ export class CreateStudentComponent implements OnInit {
     'firstname',
     'lastname',
     'password',
+    'department',
     'email',
     'phone',
-    'group_title',
+    'delete',
   ];
-  dataSource = ELEMENT_DATA;
+  dataSource = teachers;
 }

@@ -4,16 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from './user/schedule/schedule.module';
 import { AdminHomeModule } from './admin/admin-home/admin-home.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateGroupModule } from './admin/create/create-group/create-group.module';
-import { CreateStudentModule } from './admin/create/create-student/create-student.module';
-import { CreateSubjectModule } from './admin/create/create-subject/create-subject.module';
-import { CreateTeacherModule } from './admin/create/create-teacher/create-teacher.module';
+import { GroupTableModule } from './admin/admin-tables/group-table/group-table.module';
+import { StudentTableModule } from './admin/admin-tables/student-table/student-table.module';
+import { SubjecTabletModule } from './admin/admin-tables/subject-table/subject-table.module';
+import { TeacherTableModule } from './admin/admin-tables/teacher-table/teacher-table.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,13 +22,14 @@ import { CreateTeacherModule } from './admin/create/create-teacher/create-teache
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AuthModule,
     ScheduleModule,
     AdminHomeModule,
-    CreateGroupModule,
-    CreateStudentModule,
-    CreateSubjectModule,
-    CreateTeacherModule,
+    GroupTableModule,
+    StudentTableModule,
+    SubjecTabletModule,
+    TeacherTableModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
