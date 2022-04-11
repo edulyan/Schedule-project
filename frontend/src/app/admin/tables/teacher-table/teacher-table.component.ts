@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TeacherCreateComponent } from '../../create/teacher-create/teacher-create.component';
 
 export interface ITeacher {
   id: number;
@@ -26,7 +28,7 @@ const teachers: ITeacher[] = [
   styleUrls: ['./teacher-table.component.scss'],
 })
 export class TeacherTableComponent implements OnInit {
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -41,4 +43,10 @@ export class TeacherTableComponent implements OnInit {
     'delete',
   ];
   dataSource = teachers;
+
+  create() {
+    this.matDialog.open(TeacherCreateComponent, {
+      width: '400px',
+    });
+  }
 }

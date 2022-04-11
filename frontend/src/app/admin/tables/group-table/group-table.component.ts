@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { GroupCreateComponent } from '../../create/group-create/group-create.component';
 
 export interface IGroup {
   id: number;
@@ -26,10 +28,16 @@ const groups: IGroup[] = [
   styleUrls: ['./group-table.component.scss'],
 })
 export class GroupTableComponent implements OnInit {
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   displayedColumns: string[] = ['ID', 'title', 'students', 'lessons', 'delete'];
   dataSource = groups;
+
+  create() {
+    this.matDialog.open(GroupCreateComponent, {
+      width: '400px',
+    });
+  }
 }

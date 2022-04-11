@@ -1,0 +1,85 @@
+<h1 mat-dialog-title>Добавить нового преподователя</h1>
+<form #createForm="ngForm">
+  <div class="container-fluid" mat-dialog-content>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="firstname"
+            matInput
+            placeholder="Firstname"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="lastname"
+            matInput
+            placeholder="Lastname"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="password"
+            matInput
+            placeholder="Password"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="department"
+            matInput
+            placeholder="Department"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="email"
+            matInput
+            placeholder="Email"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="phone"
+            matInput
+            placeholder="Phone"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      type="button"
+      [disabled]="!createForm.valid"
+      color="black-create"
+    >
+      Создать
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Выйти</button>
+  </div>
+</form>

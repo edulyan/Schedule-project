@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SubjectCreateComponent } from '../../create/subject-create/subject-create.component';
 
 export interface ISubjects {
   id: number;
@@ -26,10 +28,16 @@ const subjects: ISubjects[] = [
   styleUrls: ['./subject-table.component.scss'],
 })
 export class SubjectTableComponent implements OnInit {
-  constructor() {}
+  constructor(private matDialog: MatDialog) {}
 
   ngOnInit(): void {}
 
   displayedColumns: string[] = ['ID', 'title', 'lessons', 'teachers', 'delete'];
   dataSource = subjects;
+
+  create() {
+    this.matDialog.open(SubjectCreateComponent, {
+      width: '400px',
+    });
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { StudentCreateComponent } from '../../create/student-create/student-create.component';
 
 export interface IStudent {
   id: number;
@@ -44,17 +45,9 @@ export class StudentTableComponent implements OnInit {
   ];
   dataSource = students;
 
-  // create() {
-  //   const ref = this.matDialog.open(CreateComponent, {
-  //     width: '450px',
-  //   });
-
-  //   ref.afterClosed().subscribe((student: IStudent) => {
-  //     if (student) {
-  //       const list = this.studentData.getValue();
-  //       list.push(student);
-  //       this.studentData.next(_.cloneDeep(list));
-  //     }
-  //   });
-  // }
+  create() {
+    this.matDialog.open(StudentCreateComponent, {
+      width: '400px',
+    });
+  }
 }
