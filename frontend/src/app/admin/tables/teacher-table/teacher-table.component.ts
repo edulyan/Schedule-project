@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherCreateComponent } from '../../create/teacher-create/teacher-create.component';
+import { TeacherUpdateComponent } from '../../update/teacher-update/teacher-update.component';
 
 export interface ITeacher {
   id: number;
@@ -46,6 +47,12 @@ export class TeacherTableComponent implements OnInit {
 
   create() {
     this.matDialog.open(TeacherCreateComponent, {
+      width: '400px',
+    });
+  }
+
+  update() {
+    this.matDialog.open(TeacherUpdateComponent, {
       width: '400px',
     });
   }

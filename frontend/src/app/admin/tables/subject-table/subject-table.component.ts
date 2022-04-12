@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SubjectCreateComponent } from '../../create/subject-create/subject-create.component';
+import { SubjectUpdateComponent } from '../../update/subject-update/subject-update.component';
 
 export interface ISubjects {
   id: number;
@@ -37,6 +38,12 @@ export class SubjectTableComponent implements OnInit {
 
   create() {
     this.matDialog.open(SubjectCreateComponent, {
+      width: '400px',
+    });
+  }
+
+  update() {
+    this.matDialog.open(SubjectUpdateComponent, {
       width: '400px',
     });
   }

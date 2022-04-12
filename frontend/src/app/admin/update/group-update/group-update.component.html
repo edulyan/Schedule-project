@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Обновить группу</h1>
+<form #createForm="ngForm">
+  <div class="container-fluid" mat-dialog-content>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="title"
+            matInput
+            placeholder="Title"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      type="button"
+      [disabled]="!createForm.valid"
+      color="black-create"
+    >
+      Обновить
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Выйти</button>
+  </div>
+</form>

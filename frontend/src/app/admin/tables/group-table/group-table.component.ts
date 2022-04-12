@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupCreateComponent } from '../../create/group-create/group-create.component';
+import { GroupUpdateComponent } from '../../update/group-update/group-update.component';
 
 export interface IGroup {
   id: number;
@@ -37,6 +38,12 @@ export class GroupTableComponent implements OnInit {
 
   create() {
     this.matDialog.open(GroupCreateComponent, {
+      width: '400px',
+    });
+  }
+
+  update() {
+    this.matDialog.open(GroupUpdateComponent, {
       width: '400px',
     });
   }

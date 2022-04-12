@@ -37,6 +37,17 @@ table {
   margin-top: 5px;
 }
 
+.student-table {
+  ::ng-deep {
+    .mat-row {
+      &:hover {
+        background-color: #888888c7;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
 .mat-column-ID {
   width: 32px;
   border-right: 1px solid currentColor;

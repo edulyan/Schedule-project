@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentCreateComponent } from '../../create/student-create/student-create.component';
+import { StudentUpdateComponent } from '../../update/student-update/student-update.component';
 
 export interface IStudent {
   id: number;
@@ -47,6 +48,12 @@ export class StudentTableComponent implements OnInit {
 
   create() {
     this.matDialog.open(StudentCreateComponent, {
+      width: '400px',
+    });
+  }
+
+  update() {
+    this.matDialog.open(StudentUpdateComponent, {
       width: '400px',
     });
   }

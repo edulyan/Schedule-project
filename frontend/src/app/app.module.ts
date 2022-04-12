@@ -16,6 +16,10 @@ import { GroupCreateModule } from './admin/create/group-create/group-create.modu
 import { StudentCreateModule } from './admin/create/student-create/student-create.module';
 import { SubjectCreateModule } from './admin/create/subject-create/subject-create.module';
 import { TeacherCreateModule } from './admin/create/teacher-create/teacher-create.module';
+import { GroupUpdateModule } from './admin/update/group-update/group-update.module';
+import { StudentUpdateModule } from './admin/update/student-update/student-update.module';
+import { SubjectUpdateModule } from './admin/update/subject-update/subject-update.module';
+import { TeacherUpdateModule } from './admin/update/teacher-update/teacher-update.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +42,10 @@ import { MatButtonModule } from '@angular/material/button';
     StudentCreateModule,
     SubjectCreateModule,
     TeacherCreateModule,
+    GroupUpdateModule,
+    StudentUpdateModule,
+    SubjectUpdateModule,
+    TeacherUpdateModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
