@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminScheduleTableComponent } from './admin/schedule/schedule-table/admin-schedule-table/admin-schedule-table.component';
 import { GroupTableComponent } from './admin/tables/group-table/group-table.component';
 import { StudentTableComponent } from './admin/tables/student-table/student-table.component';
 import { SubjectTableComponent } from './admin/tables/subject-table/subject-table.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'admin/create/student', component: StudentTableComponent },
   { path: 'admin/create/subject', component: SubjectTableComponent },
   { path: 'admin/create/teacher', component: TeacherTableComponent },
+  { path: 'admin/schedule', component: AdminScheduleTableComponent },
 ];
 
 @NgModule({

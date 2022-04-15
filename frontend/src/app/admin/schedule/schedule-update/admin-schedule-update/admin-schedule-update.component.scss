@@ -1,0 +1,34 @@
+::ng-deep .mat-form-field-underline,
+::ng-deep .mat-form-field-ripple {
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0) !important;
+  width: 200px;
+}
+
+::ng-deep .mat-form-field-label {
+  color: rgb(0, 0, 0) !important;
+  width: 200px;
+}
+
+.mat-dialog-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mat-black-create {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+  }
+}

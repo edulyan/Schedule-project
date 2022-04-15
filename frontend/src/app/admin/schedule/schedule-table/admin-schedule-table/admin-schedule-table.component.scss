@@ -1,0 +1,54 @@
+.demo-table {
+  margin-left: 260px;
+  margin-top: 70px;
+  width: 70%;
+
+  ::ng-deep {
+    .mat-row {
+      &:hover {
+        background-color: #888888c7;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .create-icon {
+    font-size: 40px;
+    text-align: right;
+  }
+
+  .delete-icon {
+    position: relative;
+    text-align: right;
+  }
+}
+
+.mat-header-cell {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.mat-column-time {
+  width: 80px;
+  font-size: 18px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-day-name {
+  text-align: center;
+  height: 120px;
+  font-size: 20px;
+  padding-left: 80px;
+}
+
+.mat-column-create {
+  text-align: center;
+  width: 50px;
+}
+
+.mat-column-delete {
+  text-align: center;
+  width: 50px;
+}
