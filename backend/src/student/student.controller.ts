@@ -3,11 +3,17 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
+  Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateStudentDto } from './dto/createStudent.dto';
+import { Student } from './entity/student.entity';
 import { StudentService } from './student.service';
 
 @Controller('student')
@@ -29,7 +35,14 @@ export class StudentController {
     return await this.studentService.getByEmail(email);
   }
 
+  @Get('/search')
+  @UsePipes(ValidationPipe)
+  search(@Query('query') query: string) {
+    return this.studentService.search(query);
+  }
+
   @Post()
+  @UsePipes(ValidationPipe)
   async create(@Body() studentDto: CreateStudentDto) {
     return this.studentService.create(studentDto);
   }

@@ -23,9 +23,9 @@ describe('GroupService', () => {
   let groupService: GroupService;
 
   const mockGroupsRepository = {
-    getAll: jest.fn(),
     find: jest.fn(),
     findOne: jest.fn(),
+    findIndex: jest.fn(),
     create: jest.fn(),
     save: jest.fn(),
     delete: jest.fn(),
@@ -86,6 +86,10 @@ describe('GroupService', () => {
     expect(getGroup).toMatchObject({ id: getGroup.id });
     expect(mockGroupsRepository.findOne).toHaveBeenCalledTimes(1);
   });
+
+  // it('Successfully removeGroupAtStudent', async () => {
+  //   mockGroupsRepository.
+  // });
 
   it('Successfully delete group by ID', async () => {
     mockGroupsRepository.delete.mockReturnValue(stackGroups);

@@ -21,6 +21,14 @@ export class GroupController {
     return await this.groupService.create(groupDto);
   }
 
+  @Delete('removeGroupAtStudent/:groupId/:studentId')
+  async removeGroupAtStudent(
+    @Param('groupId') groupId: number,
+    @Param('studentId') studentId: number,
+  ) {
+    return await this.groupService.removeGroupAtStudent(groupId, studentId);
+  }
+
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return await this.groupService.remove(id);

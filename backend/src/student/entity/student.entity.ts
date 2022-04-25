@@ -1,3 +1,4 @@
+import { IsString } from 'class-validator';
 import {
   Column,
   Entity,
@@ -15,9 +16,11 @@ export class Student {
   id: number;
 
   @Column()
+  @IsString()
   firstname: string;
 
   @Column()
+  @IsString()
   lastname: string;
 
   @Column()

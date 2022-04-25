@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from '../role/entity/role.entity';
 import { RoleService } from '../role/role.service';
-import { getConnection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { Student } from './entity/student.entity';
 import { GroupService } from '../group/group.service';
@@ -68,5 +68,11 @@ export class StudentService {
 
   async remove(id: number): Promise<void> {
     await this.studentRepository.delete(id);
+  }
+
+  async search(query: string): Promise<Student[]> {
+    return await this.studentRepository.find({
+      where: { lastname: query },
+    });
   }
 }

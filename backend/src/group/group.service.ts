@@ -1,5 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { StudentService } from '../student/student.service';
 import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/createGroup.dto';
 import { Group } from './entity/group.entity';
@@ -8,6 +14,8 @@ import { Group } from './entity/group.entity';
 export class GroupService {
   constructor(
     @InjectRepository(Group) private groupRepository: Repository<Group>,
+    @Inject(forwardRef(() => StudentService))
+    private readonly studentService: StudentService,
   ) {}
 
   async getAll(): Promise<Group[]> {
@@ -25,6 +33,22 @@ export class GroupService {
 
     const group = this.groupRepository.create(groupDto);
     return await this.groupRepository.save(group);
+  }
+
+  async removeGroupAtStudent(
+    groupId: number,
+    studentId: number,
+  ): Promise<boolean> {
+    const group = await this.getById(groupId);
+    const student = await this.studentService.getById(studentId);
+
+    let found = await group.students.find((x: any) => x.id == student.id);
+
+    console.log(found);
+
+    // await group.students.splice(found, 1);
+
+    return true;
   }
 
   async remove(id: number): Promise<boolean> {
