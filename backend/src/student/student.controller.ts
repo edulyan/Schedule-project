@@ -25,20 +25,20 @@ export class StudentController {
     return this.studentService.getAll();
   }
 
-  @Get(':id')
-  async getById(@Param('id') id: number) {
-    return this.studentService.getById(id);
-  }
-
   @Get('email/:email')
   async getByEmail(@Param('email') email: string) {
     return await this.studentService.getByEmail(email);
   }
 
-  @Get('/search')
+  @Get('search')
   @UsePipes(ValidationPipe)
   search(@Query('query') query: string) {
     return this.studentService.search(query);
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: number) {
+    return this.studentService.getById(id);
   }
 
   @Post()
@@ -61,6 +61,11 @@ export class StudentController {
     @Param('groupId') groupId: number,
   ) {
     return await this.studentService.addGroup(studentId, groupId);
+  }
+
+  @Put('/removeGroupAtStudent/:id')
+  async removeGroupAtStudent(@Param('id') id: number) {
+    return await this.studentService.removeGroupAtStudent(id);
   }
 
   @Put(':id')

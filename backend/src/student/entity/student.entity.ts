@@ -16,11 +16,9 @@ export class Student {
   id: number;
 
   @Column()
-  @IsString()
   firstname: string;
 
   @Column()
-  @IsString()
   lastname: string;
 
   @Column()

@@ -53,6 +53,21 @@ export class LessonController {
     return await this.lessonService.addTeacher(lessonId, teacherId);
   }
 
+  @Put('/removeGroupAtLesson/:id')
+  async removeGroupAtLesson(@Param('id') id: number) {
+    return await this.lessonService.removeGroupAtLesson(id);
+  }
+
+  @Put('/removeSubjectAtLesson/:id')
+  async removeSubjectAtLesson(@Param('id') id: number) {
+    return await this.lessonService.removeSubjectAtLesson(id);
+  }
+
+  @Put('/removeTeacherAtLesson/:id')
+  async removeTeacherAtLesson(@Param('id') id: number) {
+    return await this.lessonService.removeTeacherAtLesson(id);
+  }
+
   @Put(':id')
   async update(@Param('id') id: number, @Body() lessonDto: CreateLessonDto) {
     return await this.lessonService.update(id, lessonDto);

@@ -35,6 +35,22 @@ export class GroupService {
     return await this.groupRepository.save(group);
   }
 
+  // async removeGroupAtStudent(
+  //   groupId: number,
+  //   studentId: number,
+  // ): Promise<boolean> {
+  //   const group = await this.getById(groupId);
+  //   const student = await this.studentService.getById(studentId);
+
+  //   // let found = await group.students.find((x: any) => x.id == student.id);
+
+  //   // console.log(found);
+
+  //   await group.students.splice(groupId, 1);
+
+  //   return true;
+  // }
+
   async removeGroupAtStudent(
     groupId: number,
     studentId: number,
@@ -42,11 +58,7 @@ export class GroupService {
     const group = await this.getById(groupId);
     const student = await this.studentService.getById(studentId);
 
-    let found = await group.students.find((x: any) => x.id == student.id);
-
-    console.log(found);
-
-    // await group.students.splice(found, 1);
+    const found = await group.students.splice(student.id, 1);
 
     return true;
   }

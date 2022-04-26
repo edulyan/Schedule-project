@@ -41,8 +41,4 @@ export class Teacher {
 
   @OneToMany(() => Lesson, (lesson) => lesson.teacher)
   lessons: Lesson[];
-
-  @ManyToMany(() => Subject, (subject) => subject.teachers, { eager: true })
-  @JoinTable({ name: 'teacher_subjects' })
-  subjects: Subject[];
 }

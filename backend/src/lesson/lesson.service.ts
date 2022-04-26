@@ -66,6 +66,30 @@ export class LessonService {
     return lessonTarget;
   }
 
+  async removeGroupAtLesson(lessonId: number): Promise<void> {
+    const lesson = await this.getById(lessonId);
+
+    lesson.group = null;
+
+    await this.lessonRepository.save(lesson);
+  }
+
+  async removeSubjectAtLesson(lessonId: number): Promise<void> {
+    const lesson = await this.getById(lessonId);
+
+    lesson.subject = null;
+
+    await this.lessonRepository.save(lesson);
+  }
+
+  async removeTeacherAtLesson(lessonId: number): Promise<void> {
+    const lesson = await this.getById(lessonId);
+
+    lesson.teacher = null;
+
+    await this.lessonRepository.save(lesson);
+  }
+
   async update(id: number, lessonDto: CreateLessonDto): Promise<void> {
     await this.lessonRepository.update(id, lessonDto);
   }

@@ -19,8 +19,4 @@ export class Subject {
 
   @OneToMany(() => Lesson, (lesson) => lesson.group)
   lessons: Lesson[];
-
-  @ManyToMany(() => Teacher, (teacher) => teacher.subjects)
-  @JoinColumn()
-  teachers: Teacher[];
 }

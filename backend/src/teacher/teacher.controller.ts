@@ -37,14 +37,6 @@ export class TeacherController {
     return await this.teacherService.addRole(teacherId, roleId);
   }
 
-  @Post('/addSubjectToTeacher/:teacherId/:subjectId')
-  async addSubject(
-    @Param('teacherId') teacherId: number,
-    @Param('subjectId') subjectId: number,
-  ) {
-    return await this.teacherService.addSubject(teacherId, subjectId);
-  }
-
   @Put(':id')
   async update(@Param('id') id: number, @Body() teacherDto: CreateTeacherDto) {
     return await this.teacherService.update(id, teacherDto);

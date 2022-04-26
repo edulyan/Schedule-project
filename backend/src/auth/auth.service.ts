@@ -40,7 +40,6 @@ export class AuthService {
     const payload = {
       email: teacher.email,
       id: teacher.id,
-      subject: teacher.subjects,
       role: teacher.role,
       lesson: teacher.lessons,
     };

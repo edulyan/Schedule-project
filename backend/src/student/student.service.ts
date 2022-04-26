@@ -66,13 +66,21 @@ export class StudentService {
     return true;
   }
 
+  async removeGroupAtStudent(studentId: number): Promise<void> {
+    const student = await this.getById(studentId);
+
+    student.group = null;
+
+    await this.studentRepository.save(student);
+  }
+
   async remove(id: number): Promise<void> {
     await this.studentRepository.delete(id);
   }
 
   async search(query: string): Promise<Student[]> {
     return await this.studentRepository.find({
-      where: { lastname: query },
+      where: { firstname: query },
     });
   }
 }
