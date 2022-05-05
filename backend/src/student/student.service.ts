@@ -29,12 +29,16 @@ export class StudentService {
   async getByEmail(email: string): Promise<Student> {
     const findEmail = await this.studentRepository.findOne({
       where: { email },
+      relations: ['role'],
     });
     return findEmail;
   }
 
   async create(studentDto: CreateStudentDto): Promise<Student> {
     const student = this.studentRepository.create(studentDto);
+    const role = await this.roleService.getRoleByValue('USER');
+
+    student.role = role;
     return await this.studentRepository.save(student);
   }
 

@@ -6,19 +6,26 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { Roles } from '../auth/roles-auth.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { TeacherService } from './teacher.service';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('teacher')
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard, JwtAuthGuard)
   @Get()
   async getAll() {
     return await this.teacherService.getAll();
   }
 
+  @Roles('ADMIN')
   @Get(':id')
   async getById(@Param('id') id: number) {
     return await this.teacherService.getById(id);

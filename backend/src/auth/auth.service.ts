@@ -11,9 +11,8 @@ import { StudentService } from '../student/student.service';
 import { TeacherService } from '../teacher/teacher.service';
 import { Student } from '../student/entity/student.entity';
 import { Teacher } from '../teacher/entity/teacher.entity';
-import { LoginStudentDto } from '../student/dto/loginStudent.dto';
-import { LoginTeacherDto } from '../teacher/dto/loginTeacher.dto';
 import * as bcrypt from 'bcryptjs';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -25,8 +24,8 @@ export class AuthService {
 
   generateTokenStudent(student: Student) {
     const payload = {
-      email: student.email,
       id: student.id,
+      email: student.email,
       group: student.group,
       role: student.role,
     };
@@ -38,10 +37,9 @@ export class AuthService {
 
   generateTokenTeacher(teacher: Teacher) {
     const payload = {
-      email: teacher.email,
       id: teacher.id,
+      email: teacher.email,
       role: teacher.role,
-      lesson: teacher.lessons,
     };
 
     return {
@@ -49,45 +47,39 @@ export class AuthService {
     };
   }
 
-  async validateStudent(logStudentDto: LoginStudentDto) {
-    const student = await this.studentService.getByEmail(logStudentDto.email);
-    const passCheck = await bcrypt.compare(
-      logStudentDto.password,
-      student.password,
-    );
+  async validateStudent(loginDto: LoginDto) {
+    const student = await this.studentService.getByEmail(loginDto.email);
+    const passCheck = await bcrypt.compare(loginDto.password, student.password);
 
     if (student && passCheck) {
       return student;
-    } else {
-      throw new UnauthorizedException({
-        message: 'Некорректный email или пароль',
-      });
     }
+    throw new UnauthorizedException({
+      message: 'Некорректный email или пароль',
+    });
   }
 
-  async validateTeacher(logTeacherDto: LoginTeacherDto) {
-    const teacher = await this.teacherService.getByEmail(logTeacherDto.email);
-    const passCheck = await bcrypt.compare(
-      logTeacherDto.password,
-      teacher.password,
-    );
+  async validateTeacher(loginDto: LoginDto) {
+    const teacher = await this.teacherService.getByEmail(loginDto.email);
+    const passCheck = await bcrypt.compare(loginDto.password, teacher.password);
 
     if (teacher && passCheck) {
       return teacher;
-    } else {
-      throw new UnauthorizedException({
-        message: 'Некорректный email или пароль',
-      });
     }
+    throw new UnauthorizedException({
+      message: 'Некорректный email или пароль',
+    });
   }
 
-  async loginStudent(logStudentDto: LoginStudentDto) {
-    const student = await this.validateStudent(logStudentDto);
+  // async login(loginDto: LoginDto) {}
+
+  async loginStudent(loginDto: LoginDto) {
+    const student = await this.validateStudent(loginDto);
     return this.generateTokenStudent(student);
   }
 
-  async loginTeacher(logTeacherDto: LoginTeacherDto) {
-    const teacher = await this.validateTeacher(logTeacherDto);
+  async loginTeacher(loginDto: LoginDto) {
+    const teacher = await this.validateTeacher(loginDto);
     return this.generateTokenTeacher(teacher);
   }
 

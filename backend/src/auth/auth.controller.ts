@@ -1,16 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { LoginStudentDto } from '../student/dto/loginStudent.dto';
 import { CreateStudentDto } from '../student/dto/createStudent.dto';
 import { CreateTeacherDto } from '../teacher/dto/createTeacher.dto';
-import { LoginTeacherDto } from '../teacher/dto/loginTeacher.dto';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/student/login')
-  async loginStudent(@Body() student: LoginStudentDto) {
+  async loginStudent(@Body() student: LoginDto) {
     return await this.authService.loginStudent(student);
   }
 
@@ -20,7 +19,7 @@ export class AuthController {
   }
 
   @Post('/teacher/login')
-  async loginTeacher(@Body() teacher: LoginTeacherDto) {
+  async loginTeacher(@Body() teacher: LoginDto) {
     return await this.authService.loginTeacher(teacher);
   }
 

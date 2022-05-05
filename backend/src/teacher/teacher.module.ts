@@ -6,11 +6,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from '../role/entity/role.entity';
 import { Lesson } from '../lesson/entity/lesson.entity';
 import { RoleModule } from '../role/role.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   providers: [TeacherService],
   controllers: [TeacherController],
-  imports: [TypeOrmModule.forFeature([Teacher, Role, Lesson]), RoleModule],
+  imports: [
+    TypeOrmModule.forFeature([Teacher, Role, Lesson]),
+    RoleModule,
+    AuthModule,
+  ],
   exports: [TeacherService],
 })
 export class TeacherModule {}
