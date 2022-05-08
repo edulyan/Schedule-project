@@ -6,11 +6,13 @@ import { GroupTableComponent } from './admin/tables/group-table/group-table.comp
 import { StudentTableComponent } from './admin/tables/student-table/student-table.component';
 import { SubjectTableComponent } from './admin/tables/subject-table/subject-table.component';
 import { TeacherTableComponent } from './admin/tables/teacher-table/teacher-table.component';
-import { AuthComponent } from './auth/auth.component';
+import { AuthStudentComponent } from './auth/auth-student/auth-student.component';
+import { AuthTeacherComponent } from './auth/auth-teacher/auth-teacher.component';
 import { ScheduleComponent } from './user/schedule/schedule.component';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth/student', component: AuthStudentComponent },
+  { path: 'auth/teacher', component: AuthTeacherComponent },
   { path: 'user/schedule', component: ScheduleComponent },
   { path: 'admin/home', component: AdminHomeComponent },
   { path: 'admin/create/group', component: GroupTableComponent },

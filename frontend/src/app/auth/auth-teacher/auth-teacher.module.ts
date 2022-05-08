@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { AuthComponent } from './auth.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { AppRoutingModule } from '../../app-routing.module';
+import { AuthTeacherComponent } from './auth-teacher.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -19,8 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  exports: [AuthComponent],
-  declarations: [AuthComponent],
+  exports: [AuthTeacherComponent],
+  declarations: [AuthTeacherComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -42,4 +42,4 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [],
 })
-export class AuthModule {}
+export class AuthTeacherModule {}

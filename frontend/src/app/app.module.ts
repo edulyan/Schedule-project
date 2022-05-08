@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthStudentModule } from './auth/auth-student/auth-student.module';
+import { AuthTeacherModule } from './auth/auth-teacher/auth-teacher.module';
 import { ScheduleModule } from './user/schedule/schedule.module';
 import { AdminHomeModule } from './admin/admin-home/admin-home.module';
 import { GroupTableModule } from './admin/tables/group-table/group-table.module';
@@ -33,7 +35,9 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule,
+    HttpClientModule,
+    AuthStudentModule,
+    AuthTeacherModule,
     ScheduleModule,
     AdminHomeModule,
     GroupTableModule,

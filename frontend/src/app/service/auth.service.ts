@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Login } from '../models/auth/login.interface';
 import { ICreateStudent } from '../models/student/createStudent.interface';
 import { IStudent } from '../models/student/student.interface';
 import { ITeacher } from '../models/teacher/teacher.interface';
 import { ICreateTeacher } from '../models/teacher/сreateTeacher.interface';
+
+export const JWT_NAME = 'blog-token';
 
 @Injectable({
   providedIn: 'root',
@@ -15,15 +17,24 @@ export class AuthService {
 
   private URL_AUTH = 'http://localhost:3500/auth';
 
-  public loginStudent(logStudent: Login): Observable<IStudent> {
+  public loginStudent(logStudent: Login) {
     return this.http.post<IStudent>(`${this.URL_AUTH}/student/login`, {
-      logStudent,
+      email: logStudent.email,
+      password: logStudent.password,
     });
+    // .pipe(
+    //   map((token) => {
+    //     console.log('token' + token);
+    //     localStorage.setItem(JWT_NAME, token.firstname);
+    //     return token;
+    //   })
+    // );
   }
 
   public loginTeacher(logTeacher: Login): Observable<IStudent> {
     return this.http.post<IStudent>(`${this.URL_AUTH}/teacher/login`, {
-      logTeacher,
+      email: logTeacher.email,
+      password: logTeacher.password,
     });
   }
 
