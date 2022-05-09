@@ -28,7 +28,10 @@
   justify-content: center;
   align-items: center;
 
-  .header-auth {
-    color: rgb(0, 0, 0);
+  .log-headers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

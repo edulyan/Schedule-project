@@ -1,20 +1,17 @@
-<video
-  class="intro-media-video"
-  onloadedmetadata="this.muted=true"
-  preload="auto"
-  autoplay
-  muted
-  loop
-  playsinline
->
-  <source src="./../../videos/cars_main.mp4" type="video/mp4" />
-  <source src="./../../videos/cars_main.webm" type="video/webm" />
+<!-- <video class="intro-media-video" muted="" loop="" id="autoplay">
+  <source src="./../videos/cars_main.mp4" />
+  <source src="./../videos/cars_main.webm" type="video/webm" />
 </video>
+
+<script>
+  window.getElementById("autoplay").play();
+</script> -->
 
 <form [formGroup]="formGroup" (submit)="signIn()">
   <div class="log-inputs">
-    <div class="log-header">
-      <h1 class="header-auth">Log In</h1>
+    <div class="log-headers">
+      <h1>Студент</h1>
+      <h1>Log In</h1>
     </div>
 
     <div class="log-email">
