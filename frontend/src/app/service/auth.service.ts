@@ -18,10 +18,14 @@ export class AuthService {
   private URL_AUTH = 'http://localhost:3500/auth';
 
   public loginStudent(logStudent: Login) {
-    return this.http.post<IStudent>(`${this.URL_AUTH}/student/login`, {
-      email: logStudent.email,
-      password: logStudent.password,
-    });
+    return this.http.post<IStudent>(
+      `${this.URL_AUTH}/student/login`,
+      {
+        email: logStudent.email,
+        password: logStudent.password,
+      }
+      // { withCredentials: true }
+    );
     // .pipe(
     //   map((token) => {
     //     console.log('token' + token);

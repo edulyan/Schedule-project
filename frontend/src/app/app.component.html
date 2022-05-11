@@ -3,11 +3,13 @@
     <mat-toolbar-row>
       <span class="header-schedule">Расписание</span>
       <section>
-        <div class="toolBar-button-exit">
-          <button mat-icon-button>
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
-        </div>
+        <button routerLink="auth/student" class="nav-button-student" mat-button>
+          Студентам
+        </button>
+
+        <button routerLink="auth/teacher" class="nav-button-teacher" mat-button>
+          Преподователям
+        </button>
       </section>
     </mat-toolbar-row>
   </mat-toolbar>

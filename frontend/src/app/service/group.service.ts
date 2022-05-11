@@ -12,8 +12,8 @@ export class GroupService {
 
   private URL_GROUP: string = 'http://localhost:3500/group';
 
-  public getAll(): Observable<IGroup> {
-    return this.http.get<IGroup>(`${this.URL_GROUP}`);
+  public getAll(): Observable<IGroup[]> {
+    return this.http.get<IGroup[]>(`${this.URL_GROUP}`);
   }
 
   public getById(id: number): Observable<IGroup> {

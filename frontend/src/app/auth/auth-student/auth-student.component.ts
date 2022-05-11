@@ -10,11 +10,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./auth-student.component.scss'],
 })
 export class AuthStudentComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   formGroup: FormGroup | any;
   hide = true;
@@ -27,11 +23,9 @@ export class AuthStudentComponent implements OnInit {
   }
 
   public signIn(): void {
-    console.log(this.formGroup.value);
-
-    this.authService.loginStudent(this.formGroup.value).subscribe((res) => {
-      console.log(res);
-    });
+    this.authService
+      .loginStudent(this.formGroup.value)
+      .subscribe(() => this.router.navigate(['/user/schedule']));
   }
 
   // public signIn(): void {

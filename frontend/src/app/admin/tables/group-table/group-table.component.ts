@@ -1,27 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { IGroup } from 'src/app/models/group/group.interface';
+import { GroupService } from 'src/app/service/group.service';
 import { GroupCreateComponent } from '../../create/group-create/group-create.component';
 import { GroupUpdateComponent } from '../../update/group-update/group-update.component';
-
-export interface IGroup {
-  id: number;
-  title: string;
-  students: [];
-  lessons: [];
-}
-
-const groups: IGroup[] = [
-  { id: 1, title: 'Hydrogen', students: [], lessons: [] },
-  { id: 2, title: 'Helium', students: [], lessons: [] },
-  { id: 3, title: 'Lithium', students: [], lessons: [] },
-  { id: 4, title: 'Beryllium', students: [], lessons: [] },
-  { id: 5, title: 'Boron', students: [], lessons: [] },
-  { id: 6, title: 'Carbon', students: [], lessons: [] },
-  { id: 7, title: 'Nitrogen', students: [], lessons: [] },
-  { id: 8, title: 'Oxygen', students: [], lessons: [] },
-  { id: 9, title: 'Fluorine', students: [], lessons: [] },
-  { id: 10, title: 'Neon', students: [], lessons: [] },
-];
 
 @Component({
   selector: 'app-create-group',
@@ -29,12 +12,24 @@ const groups: IGroup[] = [
   styleUrls: ['./group-table.component.scss'],
 })
 export class GroupTableComponent implements OnInit {
-  constructor(private matDialog: MatDialog) {}
+  constructor(
+    private groupService: GroupService,
+    private matDialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {}
+  private groupData = new BehaviorSubject<IGroup[]>([]);
+
+  ngOnInit(): void {
+    this.groupService
+      .getAll()
+      .subscribe((groupListItem) => this.groupData.next(groupListItem));
+  }
 
   displayedColumns: string[] = ['ID', 'title', 'students', 'lessons', 'delete'];
-  dataSource = groups;
+
+  getGroups(): Observable<IGroup[]> {
+    return this.groupData.asObservable();
+  }
 
   create() {
     this.matDialog.open(GroupCreateComponent, {

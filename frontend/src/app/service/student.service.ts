@@ -8,14 +8,10 @@ import { ICreateStudent } from '../models/student/createStudent.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class TeacherService {
+export class StudentService {
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
-  private URL_STUDENT: string = 'http://localhost:3500/student';
+  private URL_STUDENT = 'http://localhost:3500/student';
 
   public getAll(): Observable<IStudent[]> {
     return this.http.get<IStudent[]>(`${this.URL_STUDENT}`);

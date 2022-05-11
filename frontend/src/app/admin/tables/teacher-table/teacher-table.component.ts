@@ -1,27 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ITeacher } from 'src/app/models/teacher/teacher.interface';
+import { TeacherService } from 'src/app/service/teacher.service';
 import { TeacherCreateComponent } from '../../create/teacher-create/teacher-create.component';
 import { TeacherUpdateComponent } from '../../update/teacher-update/teacher-update.component';
-
-export interface ITeacher {
-  id: number;
-  firstname: string;
-  lastname: string;
-  password: string;
-}
-
-const teachers: ITeacher[] = [
-  { id: 1, firstname: 'Hydrogen', lastname: '', password: '123' },
-  { id: 2, firstname: 'Helium', lastname: '', password: '123' },
-  { id: 3, firstname: 'Lithium', lastname: '', password: '123' },
-  { id: 4, firstname: 'Beryllium', lastname: '', password: '123' },
-  { id: 5, firstname: 'Boron', lastname: '', password: '123' },
-  { id: 6, firstname: 'Carbon', lastname: '', password: '123' },
-  { id: 7, firstname: 'Nitrogen', lastname: '', password: '123' },
-  { id: 8, firstname: 'Oxygen', lastname: '', password: '123' },
-  { id: 9, firstname: 'Fluorine', lastname: '', password: '123' },
-  { id: 10, firstname: 'Neon', lastname: '', password: '123' },
-];
 
 @Component({
   selector: 'app-create-teacher',
@@ -29,9 +12,18 @@ const teachers: ITeacher[] = [
   styleUrls: ['./teacher-table.component.scss'],
 })
 export class TeacherTableComponent implements OnInit {
-  constructor(private matDialog: MatDialog) {}
+  constructor(
+    private teacherService: TeacherService,
+    private matDialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {}
+  private teacherData = new BehaviorSubject<ITeacher[]>([]);
+
+  ngOnInit(): void {
+    this.teacherService
+      .getAll()
+      .subscribe((teacherListItem) => this.teacherData.next(teacherListItem));
+  }
 
   displayedColumns: string[] = [
     'ID',
@@ -43,7 +35,10 @@ export class TeacherTableComponent implements OnInit {
     'phone',
     'delete',
   ];
-  dataSource = teachers;
+
+  getTeachers(): Observable<ITeacher[]> {
+    return this.teacherData.asObservable();
+  }
 
   create() {
     this.matDialog.open(TeacherCreateComponent, {

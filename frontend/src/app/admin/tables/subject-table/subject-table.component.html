@@ -16,53 +16,55 @@
     </button>
   </div>
 
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8 subject-table"
-  >
-    <!--- Note that these columns can be defined in any order.
+  <ng-container *ngIf="getSubjects() | async as subjectListItem">
+    <table
+      mat-table
+      [dataSource]="subjectListItem"
+      class="mat-elevation-z8 subject-table"
+    >
+      <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="ID">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
+      <!-- ID Column -->
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
 
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef>Title</th>
-      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-    </ng-container>
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
 
-    <!-- Lessons Column -->
-    <ng-container matColumnDef="lessons">
-      <th mat-header-cell *matHeaderCellDef>Lessons</th>
-      <td mat-cell *matCellDef="let element">{{ element.lessons }}</td>
-    </ng-container>
+      <!-- Lessons Column -->
+      <ng-container matColumnDef="lessons">
+        <th mat-header-cell *matHeaderCellDef>Lessons</th>
+        <td mat-cell *matCellDef="let element">{{ element.lessons }}</td>
+      </ng-container>
 
-    <!-- Teachers Column -->
-    <ng-container matColumnDef="teachers">
-      <th mat-header-cell *matHeaderCellDef>Teachers</th>
-      <td mat-cell *matCellDef="let element">{{ element.teachers }}</td>
-    </ng-container>
+      <!-- Teachers Column -->
+      <ng-container matColumnDef="teachers">
+        <th mat-header-cell *matHeaderCellDef>Teachers</th>
+        <td mat-cell *matCellDef="let element">{{ element.teachers }}</td>
+      </ng-container>
 
-    <!-- Delete Column -->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button aria-label="Delete post">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="Delete post">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      (click)="update()"
-    ></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="update()"
+      ></tr>
+    </table>
+  </ng-container>
 </div>

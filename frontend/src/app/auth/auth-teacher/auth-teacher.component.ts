@@ -29,7 +29,9 @@ export class AuthTeacherComponent implements OnInit {
   public signIn(): void {
     console.log(this.formGroup.value);
 
-    this.authService.loginTeacher(this.formGroup.value).subscribe();
+    this.authService
+      .loginTeacher(this.formGroup.value)
+      .subscribe(() => this.router.navigate(['/user/schedule']));
   }
 
   // public signIn(): void {
