@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Добавить нового студента</h1>
-<form #createForm="ngForm">
+<form [formGroup]="registerForm" (submit)="createStudent()">
   <div class="container-fluid" mat-dialog-content>
     <div class="row">
       <div class="col-6">
@@ -7,6 +7,7 @@
           <input
             type="text"
             name="firstname"
+            formControlName="firstname"
             matInput
             placeholder="Firstname"
             required
@@ -19,6 +20,7 @@
           <input
             type="text"
             name="lastname"
+            formControlName="lastname"
             matInput
             placeholder="Lastname"
             required
@@ -30,6 +32,7 @@
           <input
             type="text"
             name="password"
+            formControlName="password"
             matInput
             placeholder="Password"
             required
@@ -41,6 +44,7 @@
           <input
             type="text"
             name="email"
+            formControlName="email"
             matInput
             placeholder="Email"
             required
@@ -52,6 +56,7 @@
           <input
             type="text"
             name="phone"
+            formControlName="phone"
             matInput
             placeholder="Phone"
             required
@@ -64,8 +69,10 @@
     <button
       mat-raised-button
       type="button"
-      [disabled]="!createForm.valid"
+      [disabled]="!registerForm.valid"
       color="black-create"
+      (click)="createStudent()"
+      routerLink="admin/create/student"
     >
       Создать
     </button>

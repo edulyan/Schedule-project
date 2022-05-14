@@ -7,8 +7,6 @@ import { IStudent } from '../models/student/student.interface';
 import { ITeacher } from '../models/teacher/teacher.interface';
 import { ICreateTeacher } from '../models/teacher/сreateTeacher.interface';
 
-export const JWT_NAME = 'blog-token';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -17,22 +15,26 @@ export class AuthService {
 
   private URL_AUTH = 'http://localhost:3500/auth';
 
+  logout() {
+    localStorage.removeItem('student-token');
+  }
+
   public loginStudent(logStudent: Login) {
-    return this.http.post<IStudent>(
-      `${this.URL_AUTH}/student/login`,
-      {
-        email: logStudent.email,
-        password: logStudent.password,
-      }
-      // { withCredentials: true }
-    );
-    // .pipe(
-    //   map((token) => {
-    //     console.log('token' + token);
-    //     localStorage.setItem(JWT_NAME, token.firstname);
-    //     return token;
-    //   })
-    // );
+    return this.http
+      .post<any>(
+        `${this.URL_AUTH}/student/login`,
+        {
+          email: logStudent.email,
+          password: logStudent.password,
+        }
+        // { withCredentials: true }
+      )
+      .pipe(
+        map((token) => {
+          localStorage.setItem('student-token', token.access_token);
+          return token;
+        })
+      );
   }
 
   public loginTeacher(logTeacher: Login): Observable<IStudent> {
@@ -43,14 +45,16 @@ export class AuthService {
   }
 
   public registrationStudent(student: ICreateStudent): Observable<IStudent> {
-    return this.http.post<IStudent>(`${this.URL_AUTH}/student/registration`, {
-      student,
-    });
+    return this.http.post<IStudent>(
+      `${this.URL_AUTH}/student/registration`,
+      student
+    ) as Observable<IStudent>;
   }
 
   public registrationTeacher(teacher: ICreateTeacher): Observable<ITeacher> {
-    return this.http.post<ITeacher>(`${this.URL_AUTH}/teacher/registration`, {
-      teacher,
-    });
+    return this.http.post<ITeacher>(
+      `${this.URL_AUTH}/teacher/registration`,
+      teacher
+    );
   }
 }

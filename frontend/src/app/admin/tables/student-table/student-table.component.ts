@@ -6,6 +6,7 @@ import { IStudent } from 'src/app/models/student/student.interface';
 import { StudentService } from 'src/app/service/student.service';
 import { StudentCreateComponent } from '../../create/student-create/student-create.component';
 import { StudentUpdateComponent } from '../../update/student-update/student-update.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-student',
@@ -19,6 +20,7 @@ export class StudentTableComponent implements OnInit {
   ) {}
 
   private studentData = new BehaviorSubject<IStudent[]>([]);
+  public students: IStudent = {} as IStudent;
 
   ngOnInit() {
     this.studentService
@@ -33,7 +35,7 @@ export class StudentTableComponent implements OnInit {
     'password',
     'email',
     'phone',
-    'group_title',
+    'group',
     'delete',
   ];
 
@@ -42,18 +44,47 @@ export class StudentTableComponent implements OnInit {
     //   (res) => (this.students = res),
     //   (err) => console.log(err)
     // );
+
     return this.studentData.asObservable();
   }
 
+  searchStudent(firstname: string) {
+    if (!firstname) {
+      this.studentService
+        .getAll()
+        .subscribe((studentListItem) => this.studentData.next(studentListItem));
+    } else {
+      this.studentService
+        .search(firstname)
+        .subscribe((studentListItem) => this.studentData.next(studentListItem));
+    }
+  }
+
   create() {
-    this.matDialog.open(StudentCreateComponent, {
+    const ref = this.matDialog.open(StudentCreateComponent, {
       width: '400px',
+    });
+
+    ref.afterClosed().subscribe((student: IStudent) => {
+      if (student) {
+        const list = this.studentData.getValue();
+        list.push(student);
+        this.studentData.next(_.cloneDeep(list));
+      }
     });
   }
 
   update() {
     this.matDialog.open(StudentUpdateComponent, {
       width: '400px',
+    });
+  }
+
+  delete(student: IStudent) {
+    this.studentService.remove(student.id).subscribe(() => {
+      const list = this.studentData.getValue();
+      _.remove(list, (post) => post.id === student.id);
+      this.studentData.next(_.cloneDeep(list));
     });
   }
 }

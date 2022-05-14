@@ -1,11 +1,8 @@
-import { IGroup } from '../group/group.interface';
-
-export interface IStudent {
+export interface IUpdateStudent {
   id: number;
   firstname: string;
   lastname: string;
   password: string;
   email: string;
   phone: string;
-  group: IGroup;
 }

@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DialogModule } from 'src/app/dialog/dialog.module';
 
 @NgModule({
@@ -29,6 +31,8 @@ import { DialogModule } from 'src/app/dialog/dialog.module';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [],
 })

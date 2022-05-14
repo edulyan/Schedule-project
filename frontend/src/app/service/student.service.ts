@@ -25,6 +25,12 @@ export class StudentService {
     return this.http.get<IStudent>(`${this.URL_STUDENT}/${email}`);
   }
 
+  public search(firstname: string): Observable<IStudent[]> {
+    return this.http.get<IStudent[]>(
+      `${this.URL_STUDENT}/search?query=` + firstname
+    ) as Observable<IStudent[]>;
+  }
+
   public createStudent(studentDto: ICreateStudent): Observable<IStudent> {
     return this.http.post<IStudent>(`${this.URL_STUDENT}`, {
       studentDto,
@@ -51,13 +57,14 @@ export class StudentService {
     );
   }
 
-  public update(id: number, studentDto: ICreateStudent): Observable<{}> {
+  public update(id: number, studentDto: ICreateStudent): Observable<any> {
     return this.http.put<IStudent>(`${this.URL_STUDENT}/${id}`, {
+      id,
       studentDto,
     });
   }
 
-  public remove(id: number): Observable<{}> {
+  public remove(id: number): Observable<any> {
     return this.http.delete<IStudent>(`${this.URL_STUDENT}/${id}`);
   }
 }

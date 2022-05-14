@@ -4,8 +4,12 @@
 
 <div class="form-group">
   <mat-form-field class="search">
-    <mat-label>Search</mat-label>
-    <input matInput />
+    <mat-label>Поиск</mat-label>
+    <input
+      matInput
+      [ngModel]="students.firstname"
+      (ngModelChange)="searchStudent($event)"
+    />
   </mat-form-field>
 </div>
 
@@ -62,16 +66,20 @@
       </ng-container>
 
       <!-- Group Column -->
-      <ng-container matColumnDef="group_title">
-        <th mat-header-cell *matHeaderCellDef>group-title</th>
-        <td mat-cell *matCellDef="let element">{{ element.group_title }}</td>
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef>Group</th>
+        <td mat-cell *matCellDef="let element">{{ element.group | json }}</td>
       </ng-container>
 
       <!-- Delete Column -->
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="Delete post">
+          <button
+            mat-icon-button
+            (click)="delete(element); $event.stopPropagation()"
+            aria-label="Delete post"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
