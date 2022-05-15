@@ -9,7 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
   controllers: [AuthController],
   providers: [AuthService],
   imports: [
-    StudentModule,
+    forwardRef(() => StudentModule),
     forwardRef(() => TeacherModule),
     JwtModule.register({
       secret: 'SECRET',

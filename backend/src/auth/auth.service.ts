@@ -31,7 +31,7 @@ export class AuthService {
     };
 
     return {
-      token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload),
     };
   }
 
@@ -43,7 +43,7 @@ export class AuthService {
     };
 
     return {
-      token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload),
     };
   }
 
@@ -70,8 +70,6 @@ export class AuthService {
       message: 'Некорректный email или пароль',
     });
   }
-
-  // async login(loginDto: LoginDto) {}
 
   async loginStudent(loginDto: LoginDto) {
     const student = await this.validateStudent(loginDto);

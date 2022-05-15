@@ -32,6 +32,12 @@ export class TeacherService {
     return findEmail;
   }
 
+  async search(query: string): Promise<Teacher[]> {
+    return await this.teacherRepository.find({
+      where: { firstname: query },
+    });
+  }
+
   async create(teacherDto: CreateTeacherDto): Promise<Teacher> {
     const teacher = this.teacherRepository.create(teacherDto);
     const role = await this.roleService.getRoleByValue('USER');

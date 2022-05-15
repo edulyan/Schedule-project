@@ -6,23 +6,32 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Roles } from '../auth/roles-auth.decorator';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { TeacherService } from './teacher.service';
 import { RolesGuard } from '../auth/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('teacher')
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard, JwtAuthGuard)
+  // @Roles('ADMIN')
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async getAll() {
     return await this.teacherService.getAll();
+  }
+
+  @Get('search')
+  @UsePipes(ValidationPipe)
+  search(@Query('query') query: string) {
+    return this.teacherService.search(query);
   }
 
   @Roles('ADMIN')

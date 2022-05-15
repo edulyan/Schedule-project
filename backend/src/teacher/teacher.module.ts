@@ -14,7 +14,7 @@ import { AuthModule } from '../auth/auth.module';
   imports: [
     TypeOrmModule.forFeature([Teacher, Role, Lesson]),
     RoleModule,
-    AuthModule,
+    // AuthModule,
   ],
   exports: [TeacherService],
 })

@@ -9,17 +9,21 @@ import {
   Post,
   Put,
   Query,
+  Req,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateStudentDto } from './dto/createStudent.dto';
-import { Student } from './entity/student.entity';
 import { StudentService } from './student.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Response, Request } from 'express';
 
 @Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async getAll() {
     return this.studentService.getAll();

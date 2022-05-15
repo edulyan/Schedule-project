@@ -7,6 +7,7 @@ import { StudentController } from './student.controller';
 import { StudentService } from './student.service';
 import { RoleModule } from '../role/role.module';
 import { GroupModule } from '../group/group.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [StudentController],
@@ -15,6 +16,7 @@ import { GroupModule } from '../group/group.module';
     TypeOrmModule.forFeature([Student, Group, Role]),
     RoleModule,
     GroupModule,
+    AuthModule,
   ],
   exports: [StudentService],
 })

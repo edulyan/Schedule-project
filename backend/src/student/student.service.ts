@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Role } from '../role/entity/role.entity';
 import { RoleService } from '../role/role.service';
 import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { Student } from './entity/student.entity';
 import { GroupService } from '../group/group.service';
-import { Group } from '../group/entity/group.entity';
 
 @Injectable()
 export class StudentService {
@@ -32,6 +30,12 @@ export class StudentService {
       relations: ['role'],
     });
     return findEmail;
+  }
+
+  async search(query: string): Promise<Student[]> {
+    return await this.studentRepository.find({
+      where: { firstname: query },
+    });
   }
 
   async create(studentDto: CreateStudentDto): Promise<Student> {
@@ -64,10 +68,8 @@ export class StudentService {
     return studentTarget;
   }
 
-  async update(id: number, studentDto: CreateStudentDto): Promise<boolean> {
+  async update(id: number, studentDto: CreateStudentDto): Promise<void> {
     await this.studentRepository.update(id, studentDto);
-
-    return true;
   }
 
   async removeGroupAtStudent(studentId: number): Promise<void> {
@@ -80,11 +82,5 @@ export class StudentService {
 
   async remove(id: number): Promise<void> {
     await this.studentRepository.delete(id);
-  }
-
-  async search(query: string): Promise<Student[]> {
-    return await this.studentRepository.find({
-      where: { firstname: query },
-    });
   }
 }

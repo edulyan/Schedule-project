@@ -8,5 +8,4 @@ export class CreateStudentDto {
   readonly password: string;
   readonly email: string;
   readonly phone: string;
-  //group
 }
