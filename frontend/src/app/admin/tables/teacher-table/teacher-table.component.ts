@@ -5,6 +5,7 @@ import { ITeacher } from 'src/app/models/teacher/teacher.interface';
 import { TeacherService } from 'src/app/service/teacher.service';
 import { TeacherCreateComponent } from '../../create/teacher-create/teacher-create.component';
 import { TeacherUpdateComponent } from '../../update/teacher-update/teacher-update.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-teacher',
@@ -18,6 +19,7 @@ export class TeacherTableComponent implements OnInit {
   ) {}
 
   private teacherData = new BehaviorSubject<ITeacher[]>([]);
+  public teachers: ITeacher = {} as ITeacher;
 
   ngOnInit(): void {
     this.teacherService
@@ -40,15 +42,43 @@ export class TeacherTableComponent implements OnInit {
     return this.teacherData.asObservable();
   }
 
+  searchStudent(firstname: string) {
+    if (!firstname) {
+      this.teacherService
+        .getAll()
+        .subscribe((teacherListItem) => this.teacherData.next(teacherListItem));
+    } else {
+      this.teacherService
+        .search(firstname)
+        .subscribe((teacherListItem) => this.teacherData.next(teacherListItem));
+    }
+  }
+
   create() {
-    this.matDialog.open(TeacherCreateComponent, {
+    const ref = this.matDialog.open(TeacherCreateComponent, {
       width: '400px',
+    });
+
+    ref.afterClosed().subscribe((teacher: ITeacher) => {
+      if (teacher) {
+        const list = this.teacherData.getValue();
+        list.push(teacher);
+        this.teacherData.next(_.cloneDeep(list));
+      }
     });
   }
 
   update() {
     this.matDialog.open(TeacherUpdateComponent, {
       width: '400px',
+    });
+  }
+
+  delete(teacher: ITeacher) {
+    this.teacherService.remove(teacher.id).subscribe(() => {
+      const list = this.teacherData.getValue();
+      _.remove(list, (post) => post.id === teacher.id);
+      this.teacherData.next(_.cloneDeep(list));
     });
   }
 }

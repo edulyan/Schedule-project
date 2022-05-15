@@ -27,6 +27,7 @@ import { AdminScheduleUpdateModule } from './admin/schedule/schedule-update/admi
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogModule } from './dialog/dialog.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,6 +55,7 @@ import { MatButtonModule } from '@angular/material/button';
     TeacherUpdateModule,
     AdminScheduleTableModule,
     AdminScheduleUpdateModule,
+    DialogModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

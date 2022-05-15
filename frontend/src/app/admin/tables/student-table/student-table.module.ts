@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 import { DialogModule } from 'src/app/dialog/dialog.module';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { DialogModule } from 'src/app/dialog/dialog.module';
     MatTableModule,
     MatDialogModule,
     MatTooltipModule,
+    MatCardModule,
   ],
   providers: [],
 })

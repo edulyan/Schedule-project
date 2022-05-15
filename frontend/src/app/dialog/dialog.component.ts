@@ -3,19 +3,25 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog',
-  template: ` <h1 mat-dialog-title>Confirm your action!</h1>
+  template: ` <h1 mat-dialog-title>Подтвердите ваше действие</h1>
     <div>
-      <p>Are you sure you want to continue ?</p>
+      <p>ВЫ действительно хотите удалить ?</p>
     </div>
     <div mat-dialog-actions>
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button type="button" (click)="submit()" color="warn">
-        Continue
+      <button
+        mat-raised-button
+        type="button"
+        color="black-create"
+        (click)="submit()"
+      >
+        Продолжить
       </button>
+      <button mat-raised-button mat-dialog-close color="warn">Отменить</button>
     </div>`,
+  styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
-  constructor(private dialogRef: MatDialogRef<void>) {}
+  constructor(public dialogRef: MatDialogRef<void>) {}
 
   public submit() {
     this.dialogRef.close(true);

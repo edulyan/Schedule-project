@@ -20,18 +20,12 @@ export class StudentCreateComponent implements OnInit {
     private authService: AuthService,
     private studentService: StudentService,
     private router: Router,
-    private formBuilder: FormBuilder // @Inject(MAT_DIALOG_DATA) public data: { studentUpdate: IUpdateStudent }
+    private formBuilder: FormBuilder
   ) {}
-
-  public isEditing = false;
-  public newStudentModel: IStudent | IUpdateStudent = {} as IStudent;
 
   registerForm: FormGroup | any;
 
   ngOnInit(): void {
-    // this.isEditing = Boolean(this.data && this.data.studentUpdate);
-    // this.newStudentModel = this.data.studentUpdate;
-
     this.registerForm = this.formBuilder.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -42,16 +36,11 @@ export class StudentCreateComponent implements OnInit {
   }
 
   createStudent() {
-    if (this.registerForm.invalid) {
-      return;
+    if (this.registerForm.valid) {
+      this.handleAfterCreate(
+        this.authService.registrationStudent(this.registerForm.value)
+      );
     }
-
-    this.handleAfterCreate(
-      this.authService.registrationStudent(this.registerForm.value)
-    );
-
-    // console.log(this.registerForm.value);
-    // this.authService.registrationStudent(this.registerForm.value).subscribe();
   }
 
   // create(form: NgForm) {

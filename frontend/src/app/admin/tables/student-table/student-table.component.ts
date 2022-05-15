@@ -7,6 +7,8 @@ import { StudentService } from 'src/app/service/student.service';
 import { StudentCreateComponent } from '../../create/student-create/student-create.component';
 import { StudentUpdateComponent } from '../../update/student-update/student-update.component';
 import * as _ from 'lodash';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { ICreateStudent } from 'src/app/models/student/createStudent.interface';
 
 @Component({
   selector: 'app-create-student',
@@ -16,7 +18,7 @@ import * as _ from 'lodash';
 export class StudentTableComponent implements OnInit {
   constructor(
     private studentService: StudentService,
-    private matDialog: MatDialog
+    public matDialog: MatDialog
   ) {}
 
   private studentData = new BehaviorSubject<IStudent[]>([]);
@@ -40,11 +42,6 @@ export class StudentTableComponent implements OnInit {
   ];
 
   getStudents(): Observable<IStudent[]> {
-    // this.studentService.getAll().subscribe(
-    //   (res) => (this.students = res),
-    //   (err) => console.log(err)
-    // );
-
     return this.studentData.asObservable();
   }
 
@@ -74,17 +71,37 @@ export class StudentTableComponent implements OnInit {
     });
   }
 
-  update() {
-    this.matDialog.open(StudentUpdateComponent, {
+  update(student: IStudent) {
+    const ref = this.matDialog.open(StudentUpdateComponent, {
       width: '400px',
+      // data: { studentUPD: student },
+    });
+
+    ref.afterClosed().subscribe((canContinue) => {
+      if (canContinue) {
+        const list = this.studentData.getValue();
+        const postIndex = _.findIndex(list, (post) => post.id === student.id);
+        list[postIndex] = student;
+
+        this.studentData.next(_.cloneDeep(list));
+      }
     });
   }
 
   delete(student: IStudent) {
-    this.studentService.remove(student.id).subscribe(() => {
-      const list = this.studentData.getValue();
-      _.remove(list, (post) => post.id === student.id);
-      this.studentData.next(_.cloneDeep(list));
+    const ref = this.matDialog.open(DialogComponent, {
+      width: '360px',
+      height: '190px',
+    });
+
+    ref.afterClosed().subscribe((canContinue) => {
+      if (canContinue) {
+        this.studentService.remove(student.id).subscribe(() => {
+          const list = this.studentData.getValue();
+          _.remove(list, (post) => post.id === student.id);
+          this.studentData.next(_.cloneDeep(list));
+        });
+      }
     });
   }
 }
