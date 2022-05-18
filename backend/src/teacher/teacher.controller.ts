@@ -16,6 +16,7 @@ import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { TeacherService } from './teacher.service';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UpdateTeacherDto } from './dto/updateTeacher.dto';
 
 @Controller('teacher')
 export class TeacherController {
@@ -53,9 +54,9 @@ export class TeacherController {
     return await this.teacherService.addRole(teacherId, roleId);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() teacherDto: CreateTeacherDto) {
-    return await this.teacherService.update(id, teacherDto);
+  @Put()
+  async update(@Body() teacherDto: UpdateTeacherDto) {
+    return await this.teacherService.update(teacherDto);
   }
   @Delete(':id')
   async remove(@Param('id') id: number) {

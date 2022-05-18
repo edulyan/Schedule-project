@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSubjectDto } from './dto/createSubject.dto';
+import { UpdateSubjectDto } from './dto/updateSubject.dto';
 import { Subject } from './entity/subject.entity';
 
 @Injectable()
@@ -11,11 +12,18 @@ export class SubjectService {
   ) {}
 
   async getAll(): Promise<Subject[]> {
-    return await this.subjectRepository.find();
+    return await this.subjectRepository.find({ relations: ['lessons'] });
+  }
+
+  async search(query: string): Promise<Subject[]> {
+    return await this.subjectRepository.find({
+      where: { title: query },
+      relations: ['lessons'],
+    });
   }
 
   async getById(id: number): Promise<Subject> {
-    return await this.subjectRepository.findOne(id);
+    return await this.subjectRepository.findOne(id, { relations: ['lessons'] });
   }
 
   async getTitle(title: string): Promise<Subject> {
@@ -28,8 +36,8 @@ export class SubjectService {
     return await this.subjectRepository.save(newSubject);
   }
 
-  async update(id: number, subject: CreateSubjectDto): Promise<void> {
-    await this.subjectRepository.update(id, subject);
+  async update(subject: UpdateSubjectDto): Promise<Subject> {
+    return await this.subjectRepository.save(subject);
   }
 
   async remove(id: number): Promise<void> {

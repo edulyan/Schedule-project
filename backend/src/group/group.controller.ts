@@ -1,5 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { CreateGroupDto } from './dto/createGroup.dto';
+import { UpdateGroupDto } from './dto/updateGroup.dto';
 import { GroupService } from './group.service';
 
 @Controller('group')
@@ -9,6 +19,11 @@ export class GroupController {
   @Get()
   async getAll() {
     return await this.groupService.getAll();
+  }
+
+  @Get('search')
+  async search(@Query('query') query: string) {
+    return await this.groupService.search(query);
   }
 
   @Get(':id')
@@ -27,6 +42,11 @@ export class GroupController {
     @Param('studentId') studentId: number,
   ) {
     return await this.groupService.removeGroupAtStudent(groupId, studentId);
+  }
+
+  @Put()
+  async update(@Body() groupDto: UpdateGroupDto) {
+    return await this.groupService.update(groupDto);
   }
 
   @Delete(':id')

@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/createStudent.dto';
 import { Student } from './entity/student.entity';
 import { GroupService } from '../group/group.service';
+import { UpdateStudentDto } from './dto/updateStudent.dto';
 
 @Injectable()
 export class StudentService {
@@ -35,6 +36,7 @@ export class StudentService {
   async search(query: string): Promise<Student[]> {
     return await this.studentRepository.find({
       where: { firstname: query },
+      relations: ['role', 'group'],
     });
   }
 
@@ -68,8 +70,8 @@ export class StudentService {
     return studentTarget;
   }
 
-  async update(id: number, studentDto: CreateStudentDto): Promise<void> {
-    await this.studentRepository.update(id, studentDto);
+  async update(studentDto: UpdateStudentDto): Promise<Student> {
+    return await this.studentRepository.save(studentDto);
   }
 
   async removeGroupAtStudent(studentId: number): Promise<void> {

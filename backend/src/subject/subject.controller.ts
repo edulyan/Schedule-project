@@ -6,8 +6,10 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateSubjectDto } from './dto/createSubject.dto';
+import { UpdateSubjectDto } from './dto/updateSubject.dto';
 import { Subject } from './entity/subject.entity';
 import { SubjectService } from './subject.service';
 
@@ -18,6 +20,11 @@ export class SubjectController {
   @Get()
   async getAll() {
     return await this.subjectService.getAll();
+  }
+
+  @Get('search')
+  async search(@Query('query') query: string) {
+    return this.subjectService.search(query);
   }
 
   @Get(':id')
@@ -31,13 +38,13 @@ export class SubjectController {
   }
 
   @Post()
-  async create(@Body() subject: CreateSubjectDto): Promise<Subject> {
+  async create(@Body() subject: CreateSubjectDto) {
     return await this.subjectService.create(subject);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() subject: CreateSubjectDto) {
-    return await this.subjectService.update(id, subject);
+  @Put()
+  async update(@Body() subject: UpdateSubjectDto) {
+    return await this.subjectService.update(subject);
   }
 
   @Delete(':id')

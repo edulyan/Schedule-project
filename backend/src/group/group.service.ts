@@ -9,6 +9,7 @@ import { StudentService } from '../student/student.service';
 import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/createGroup.dto';
 import { Group } from './entity/group.entity';
+import { UpdateGroupDto } from './dto/updateGroup.dto';
 
 @Injectable()
 export class GroupService {
@@ -19,11 +20,22 @@ export class GroupService {
   ) {}
 
   async getAll(): Promise<Group[]> {
-    return await this.groupRepository.find();
+    return await this.groupRepository.find({
+      relations: ['students', 'lessons'],
+    });
   }
 
   async getById(id: number): Promise<Group> {
-    return await this.groupRepository.findOne(id);
+    return await this.groupRepository.findOne(id, {
+      relations: ['students', 'lessons'],
+    });
+  }
+
+  async search(query: string): Promise<Group[]> {
+    return await this.groupRepository.find({
+      where: { title: query },
+      relations: ['students', 'lessons'],
+    });
   }
 
   async create(groupDto: CreateGroupDto): Promise<Group> {
@@ -61,6 +73,10 @@ export class GroupService {
     const found = await group.students.splice(student.id, 1);
 
     return true;
+  }
+
+  async update(group: UpdateGroupDto): Promise<Group> {
+    return await this.groupRepository.save(group);
   }
 
   async remove(id: number): Promise<boolean> {

@@ -18,6 +18,7 @@ import { CreateStudentDto } from './dto/createStudent.dto';
 import { StudentService } from './student.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Response, Request } from 'express';
+import { UpdateStudentDto } from './dto/updateStudent.dto';
 
 @Controller('student')
 export class StudentController {
@@ -36,7 +37,7 @@ export class StudentController {
 
   @Get('search')
   @UsePipes(ValidationPipe)
-  search(@Query('query') query: string) {
+  async search(@Query('query') query: string) {
     return this.studentService.search(query);
   }
 
@@ -72,9 +73,9 @@ export class StudentController {
     return await this.studentService.removeGroupAtStudent(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() studentDto: CreateStudentDto) {
-    return await this.studentService.update(id, studentDto);
+  @Put()
+  async update(@Body() studentDto: UpdateStudentDto) {
+    return await this.studentService.update(studentDto);
   }
 
   @Delete(':id')

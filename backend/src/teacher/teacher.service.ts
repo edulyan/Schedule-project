@@ -4,6 +4,7 @@ import { RoleService } from '../role/role.service';
 import { Repository } from 'typeorm';
 import { CreateTeacherDto } from './dto/createTeacher.dto';
 import { Teacher } from './entity/teacher.entity';
+import { UpdateTeacherDto } from './dto/updateTeacher.dto';
 
 @Injectable()
 export class TeacherService {
@@ -63,8 +64,8 @@ export class TeacherService {
     );
   }
 
-  async update(id: number, teacherDto: CreateTeacherDto): Promise<void> {
-    await this.teacherRepository.update(id, teacherDto);
+  async update(teacherDto: UpdateTeacherDto): Promise<Teacher> {
+    return await this.teacherRepository.save(teacherDto);
   }
 
   async remove(id: number): Promise<void> {
