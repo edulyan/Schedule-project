@@ -13,7 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  exports: [GroupCreateComponent],
+  exports: [
+    GroupCreateComponent,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatDialogModule,
+  ],
   declarations: [GroupCreateComponent],
   imports: [
     CommonModule,

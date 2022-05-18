@@ -57,8 +57,11 @@ export class StudentService {
     );
   }
 
-  public update(id: number, studentDto: ICreateStudent): Observable<any> {
-    return this.http.put<IStudent>(`${this.URL_STUDENT}/${id}`, studentDto);
+  public update(studentDto: IStudent): Observable<IStudent> {
+    return this.http.put(
+      `${this.URL_STUDENT}`,
+      studentDto
+    ) as Observable<IStudent>;
   }
 
   public remove(id: number): Observable<any> {

@@ -5,7 +5,11 @@
 <div class="form-subject">
   <mat-form-field class="search">
     <mat-label>Search</mat-label>
-    <input matInput />
+    <input
+      matInput
+      [ngModel]="subjects.title"
+      (ngModelChange)="searchGroup($event)"
+    />
   </mat-form-field>
 </div>
 
@@ -43,17 +47,15 @@
         <td mat-cell *matCellDef="let element">{{ element.lessons }}</td>
       </ng-container>
 
-      <!-- Teachers Column -->
-      <ng-container matColumnDef="teachers">
-        <th mat-header-cell *matHeaderCellDef>Teachers</th>
-        <td mat-cell *matCellDef="let element">{{ element.teachers }}</td>
-      </ng-container>
-
       <!-- Delete Column -->
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="Delete post">
+          <button
+            mat-icon-button
+            (click)="delete(element); $event.stopPropagation()"
+            aria-label="Delete post"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -63,7 +65,7 @@
       <tr
         mat-row
         *matRowDef="let row; columns: displayedColumns"
-        (click)="update()"
+        (click)="update(row)"
       ></tr>
     </table>
   </ng-container>

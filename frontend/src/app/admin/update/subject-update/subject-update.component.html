@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Обновить предмет</h1>
-<form #createForm="ngForm">
+<form #updateForm="ngForm">
   <div class="container-fluid" mat-dialog-content>
     <div class="row">
       <div class="col-6">
@@ -7,6 +7,7 @@
           <input
             type="text"
             name="title"
+            [(ngModel)]="updateSubjectModel.title"
             matInput
             placeholder="Title"
             required
@@ -19,10 +20,11 @@
     <button
       mat-raised-button
       type="button"
-      [disabled]="!createForm.valid"
+      (click)="updateGroup(updateForm)"
+      [disabled]="!updateForm.valid"
       color="black-create"
     >
-      Создать
+      Обновить
     </button>
     <button mat-raised-button color="warn" mat-dialog-close>Выйти</button>
   </div>

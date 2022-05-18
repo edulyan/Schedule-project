@@ -10,7 +10,7 @@ import { IGroup } from '../models/group/group.interface';
 export class GroupService {
   constructor(private http: HttpClient) {}
 
-  private URL_GROUP: string = 'http://localhost:3500/group';
+  private URL_GROUP = 'http://localhost:3500/group';
 
   public getAll(): Observable<IGroup[]> {
     return this.http.get<IGroup[]>(`${this.URL_GROUP}`);
@@ -20,10 +20,19 @@ export class GroupService {
     return this.http.get<IGroup>(`${this.URL_GROUP}/${id}`);
   }
 
+  public search(title: string): Observable<IGroup[]> {
+    return this.http.get<IGroup[]>(`${this.URL_GROUP}/search?query=` + title);
+  }
+
   public create(group: ICreateGroup): Observable<IGroup> {
-    return this.http.post<IGroup>(`${this.URL_GROUP}`, {
-      group,
-    });
+    return this.http.post<IGroup>(
+      `${this.URL_GROUP}`,
+      group
+    ) as Observable<IGroup>;
+  }
+
+  public update(group: IGroup): Observable<IGroup> {
+    return this.http.put(`${this.URL_GROUP}`, group) as Observable<IGroup>;
   }
 
   public remove(id: number): Observable<{}> {

@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Обновить учителя</h1>
-<form #createForm="ngForm">
+<form #updateForm="ngForm">
   <div class="container-fluid" mat-dialog-content>
     <div class="row">
       <div class="col-6">
@@ -7,6 +7,7 @@
           <input
             type="text"
             name="firstname"
+            [(ngModel)]="updateTeacherModel.firstname"
             matInput
             placeholder="Firstname"
             required
@@ -19,6 +20,7 @@
           <input
             type="text"
             name="lastname"
+            [(ngModel)]="updateTeacherModel.lastname"
             matInput
             placeholder="Lastname"
             required
@@ -30,6 +32,7 @@
           <input
             type="text"
             name="password"
+            [(ngModel)]="updateTeacherModel.password"
             matInput
             placeholder="Password"
             required
@@ -41,6 +44,7 @@
           <input
             type="text"
             name="department"
+            [(ngModel)]="updateTeacherModel.department"
             matInput
             placeholder="Department"
             required
@@ -52,6 +56,7 @@
           <input
             type="text"
             name="email"
+            [(ngModel)]="updateTeacherModel.email"
             matInput
             placeholder="Email"
             required
@@ -63,6 +68,7 @@
           <input
             type="text"
             name="phone"
+            [(ngModel)]="updateTeacherModel.phone"
             matInput
             placeholder="Phone"
             required
@@ -75,10 +81,11 @@
     <button
       mat-raised-button
       type="button"
-      [disabled]="!createForm.valid"
+      (click)="updateTeacher(updateForm)"
+      [disabled]="!updateForm.valid"
       color="black-create"
     >
-      Создать
+      Обновить
     </button>
     <button mat-raised-button color="warn" mat-dialog-close>Выйти</button>
   </div>

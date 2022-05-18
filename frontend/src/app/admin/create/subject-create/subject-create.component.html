@@ -7,6 +7,7 @@
           <input
             type="text"
             name="title"
+            [(ngModel)]="newSubjectModel.title"
             matInput
             placeholder="Title"
             required
@@ -19,6 +20,7 @@
     <button
       mat-raised-button
       type="button"
+      (click)="createSubject(createForm)"
       [disabled]="!createForm.valid"
       color="black-create"
     >

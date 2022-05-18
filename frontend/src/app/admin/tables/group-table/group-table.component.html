@@ -4,8 +4,12 @@
 
 <div class="form-group">
   <mat-form-field class="search">
-    <mat-label>Search</mat-label>
-    <input matInput />
+    <mat-label>Поиск</mat-label>
+    <input
+      matInput
+      [ngModel]="groups.title"
+      (ngModelChange)="searchGroup($event)"
+    />
   </mat-form-field>
 </div>
 
@@ -40,20 +44,26 @@
       <!-- Students Column -->
       <ng-container matColumnDef="students">
         <th mat-header-cell *matHeaderCellDef>Students</th>
-        <td mat-cell *matCellDef="let element">{{ element.students }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.students | json }}
+        </td>
       </ng-container>
 
       <!-- Lessons Column -->
       <ng-container matColumnDef="lessons">
         <th mat-header-cell *matHeaderCellDef>Lessons</th>
-        <td mat-cell *matCellDef="let element">{{ element.lessons }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.lessons | json }}</td>
       </ng-container>
 
       <!-- Delete Column -->
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="Delete post">
+          <button
+            mat-icon-button
+            (click)="delete(element); $event.stopPropagation()"
+            aria-label="Delete post"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -63,7 +73,7 @@
       <tr
         mat-row
         *matRowDef="let row; columns: displayedColumns"
-        (click)="update()"
+        (click)="update(row)"
       ></tr>
     </table>
   </ng-container>

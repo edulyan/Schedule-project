@@ -24,6 +24,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./schedule.component.scss'],
 })
 export class ScheduleComponent implements OnInit {
+  date = new Date();
+
   constructor() {}
 
   ngOnInit(): void {}

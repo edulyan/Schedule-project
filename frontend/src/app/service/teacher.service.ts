@@ -10,10 +10,6 @@ import { ICreateTeacher } from '../models/teacher/сreateTeacher.interface';
 export class TeacherService {
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
   private URL_TEACHER: string = 'http://localhost:3500/teacher';
 
   public getAll(): Observable<ITeacher[]> {
@@ -59,10 +55,11 @@ export class TeacherService {
     );
   }
 
-  public update(id: number, teacherDto: ICreateTeacher): Observable<{}> {
-    return this.http.put<ITeacher>(`${this.URL_TEACHER}/${id}`, {
-      teacherDto,
-    });
+  public update(teacherDto: ITeacher): Observable<ITeacher> {
+    return this.http.put<ITeacher>(
+      `${this.URL_TEACHER}`,
+      teacherDto
+    ) as Observable<ITeacher>;
   }
 
   public remove(id: number): Observable<{}> {

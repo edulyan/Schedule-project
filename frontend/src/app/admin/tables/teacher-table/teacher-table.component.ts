@@ -68,9 +68,25 @@ export class TeacherTableComponent implements OnInit {
     });
   }
 
-  update() {
-    this.matDialog.open(TeacherUpdateComponent, {
+  update(teacherUPD: ITeacher) {
+    const ref = this.matDialog.open(TeacherUpdateComponent, {
       width: '400px',
+      data: { teacher: teacherUPD },
+    });
+
+    ref.afterClosed().subscribe((editedTeacher: ITeacher) => {
+      if (editedTeacher) {
+        console.log(1234);
+
+        const list = this.teacherData.getValue();
+        const postIndex = _.findIndex(
+          list,
+          (post) => post.id === editedTeacher.id
+        );
+        list[postIndex] = editedTeacher;
+
+        this.teacherData.next(_.cloneDeep(list));
+      }
     });
   }
 

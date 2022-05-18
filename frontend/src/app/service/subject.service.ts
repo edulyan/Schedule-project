@@ -10,14 +10,16 @@ import { ISubject } from '../models/subject/subject.interface';
 export class SubjectService {
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
   private URL_SUBJECT: string = 'http://localhost:3500/subject';
 
   public getAll(): Observable<ISubject[]> {
     return this.http.get<ISubject[]>(`${this.URL_SUBJECT}`);
+  }
+
+  public search(title: string): Observable<ISubject[]> {
+    return this.http.get<ISubject[]>(
+      `${this.URL_SUBJECT}/search?query=` + title
+    );
   }
 
   public getById(id: number): Observable<ISubject> {
@@ -29,15 +31,11 @@ export class SubjectService {
   }
 
   public createSubject(subjectDto: ICreateSubject): Observable<ISubject> {
-    return this.http.post<ISubject>(`${this.URL_SUBJECT}`, {
-      subjectDto,
-    });
+    return this.http.post<ISubject>(`${this.URL_SUBJECT}`, subjectDto);
   }
 
-  public update(id: number, subjectDto: ICreateSubject): Observable<{}> {
-    return this.http.put<ISubject>(`${this.URL_SUBJECT}/${id}`, {
-      subjectDto,
-    });
+  public update(subjectDto: ISubject): Observable<ISubject> {
+    return this.http.put<ISubject>(`${this.URL_SUBJECT}`, subjectDto);
   }
 
   public remove(id: number): Observable<{}> {

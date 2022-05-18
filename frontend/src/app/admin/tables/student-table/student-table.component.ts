@@ -8,7 +8,6 @@ import { StudentCreateComponent } from '../../create/student-create/student-crea
 import { StudentUpdateComponent } from '../../update/student-update/student-update.component';
 import * as _ from 'lodash';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
-import { ICreateStudent } from 'src/app/models/student/createStudent.interface';
 
 @Component({
   selector: 'app-create-student',
@@ -71,17 +70,20 @@ export class StudentTableComponent implements OnInit {
     });
   }
 
-  update(student: IStudent) {
+  update(studentUPD: IStudent) {
     const ref = this.matDialog.open(StudentUpdateComponent, {
       width: '400px',
-      // data: { studentUPD: student },
+      data: { student: studentUPD },
     });
 
-    ref.afterClosed().subscribe((canContinue) => {
-      if (canContinue) {
+    ref.afterClosed().subscribe((editedStudent: IStudent) => {
+      if (editedStudent) {
         const list = this.studentData.getValue();
-        const postIndex = _.findIndex(list, (post) => post.id === student.id);
-        list[postIndex] = student;
+        const postIndex = _.findIndex(
+          list,
+          (post) => post.id === editedStudent.id
+        );
+        list[postIndex] = editedStudent;
 
         this.studentData.next(_.cloneDeep(list));
       }
