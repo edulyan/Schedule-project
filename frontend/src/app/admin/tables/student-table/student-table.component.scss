@@ -35,6 +35,13 @@
 table {
   width: 100%;
   margin-top: 5px;
+
+  .header-table {
+    // position: relative;
+    // text-align: center;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+  }
 }
 
 .student-table {
@@ -61,4 +68,8 @@ table {
 
 .mat-column-lastname {
   padding-right: 16px;
+}
+
+.btn-update-group {
+  background-color: rgb(223, 198, 54);
 }

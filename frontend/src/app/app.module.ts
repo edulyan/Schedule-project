@@ -28,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogModule } from './dialog/dialog.module';
+import { UpdateStudentGroupModule } from './admin/tables/student-table/update-student-group/update-student-group.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { DialogModule } from './dialog/dialog.module';
     AdminScheduleTableModule,
     AdminScheduleUpdateModule,
     DialogModule,
+    UpdateStudentGroupModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

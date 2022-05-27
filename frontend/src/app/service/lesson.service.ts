@@ -62,7 +62,7 @@ export class LessonService {
     });
   }
 
-  public remove(id: number): Observable<{}> {
+  public remove(id: number): Observable<any> {
     return this.http.delete<ILesson>(`${this.URL_LESSON}/${id}`);
   }
 }

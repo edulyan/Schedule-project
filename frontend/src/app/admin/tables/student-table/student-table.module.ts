@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 import { DialogModule } from 'src/app/dialog/dialog.module';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { DialogModule } from 'src/app/dialog/dialog.module';
     MatDialogModule,
     MatTooltipModule,
     MatCardModule,
+    MatSelectModule,
   ],
   providers: [],
 })

@@ -31,7 +31,6 @@ export class TeacherTableComponent implements OnInit {
     'ID',
     'firstname',
     'lastname',
-    'password',
     'department',
     'email',
     'phone',

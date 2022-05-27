@@ -44,7 +44,13 @@
       <!-- Lessons Column -->
       <ng-container matColumnDef="lessons">
         <th mat-header-cell *matHeaderCellDef>Lessons</th>
-        <td mat-cell *matCellDef="let element">{{ element.lessons }}</td>
+        <td mat-cell *matCellDef="let element">
+          <mat-nav-list>
+            <mat-list-item *ngFor="let gr of element.lessons">
+              {{ [gr.classroom] }}
+            </mat-list-item>
+          </mat-nav-list>
+        </td>
       </ng-container>
 
       <!-- Delete Column -->

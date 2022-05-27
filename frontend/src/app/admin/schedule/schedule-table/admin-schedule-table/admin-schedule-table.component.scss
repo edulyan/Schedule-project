@@ -1,3 +1,7 @@
+// .mat-icon {
+//   font-size: 40px;
+// }
+
 .demo-table {
   margin-left: 260px;
   margin-top: 70px;
@@ -11,16 +15,6 @@
       }
     }
   }
-
-  .create-icon {
-    font-size: 40px;
-    text-align: right;
-  }
-
-  .delete-icon {
-    position: relative;
-    text-align: right;
-  }
 }
 
 .mat-header-cell {
@@ -29,7 +23,7 @@
 }
 
 .mat-column-time {
-  width: 80px;
+  width: 104px;
   font-size: 18px;
   border-right: 1px solid currentColor;
   padding-right: 24px;
@@ -44,11 +38,19 @@
 }
 
 .mat-column-create {
-  text-align: center;
+  text-align: right;
   width: 50px;
+
+  .create-icon {
+    font-size: 40px;
+  }
 }
 
 .mat-column-delete {
-  text-align: center;
+  text-align: right;
   width: 50px;
+
+  .delete-icon {
+    font-size: 40px;
+  }
 }

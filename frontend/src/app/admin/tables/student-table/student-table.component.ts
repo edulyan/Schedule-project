@@ -8,6 +8,14 @@ import { StudentCreateComponent } from '../../create/student-create/student-crea
 import { StudentUpdateComponent } from '../../update/student-update/student-update.component';
 import * as _ from 'lodash';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { IGroup } from 'src/app/models/group/group.interface';
+import { GroupService } from 'src/app/service/group.service';
+import { UpdateStudentGroupComponent } from './update-student-group/update-student-group.component';
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-create-student',
@@ -17,13 +25,18 @@ import { DialogComponent } from 'src/app/dialog/dialog.component';
 export class StudentTableComponent implements OnInit {
   constructor(
     private studentService: StudentService,
+    private groupService: GroupService,
     public matDialog: MatDialog
   ) {}
 
   private studentData = new BehaviorSubject<IStudent[]>([]);
+  private groupData = new BehaviorSubject<IGroup[]>([]);
   public students: IStudent = {} as IStudent;
 
   ngOnInit() {
+    this.groupService
+      .getAll()
+      .subscribe((groupListItem) => this.groupData.next(groupListItem));
     this.studentService
       .getAll()
       .subscribe((studentListItem) => this.studentData.next(studentListItem));
@@ -33,7 +46,6 @@ export class StudentTableComponent implements OnInit {
     'ID',
     'firstname',
     'lastname',
-    'password',
     'email',
     'phone',
     'group',
@@ -42,6 +54,10 @@ export class StudentTableComponent implements OnInit {
 
   getStudents(): Observable<IStudent[]> {
     return this.studentData.asObservable();
+  }
+
+  getGroups(): Observable<IGroup[]> {
+    return this.groupData.asObservable();
   }
 
   searchStudent(firstname: string) {
@@ -84,6 +100,23 @@ export class StudentTableComponent implements OnInit {
           (post) => post.id === editedStudent.id
         );
         list[postIndex] = editedStudent;
+
+        this.studentData.next(_.cloneDeep(list));
+      }
+    });
+  }
+
+  updateGroup(studentUPD: IStudent) {
+    const ref = this.matDialog.open(UpdateStudentGroupComponent, {
+      width: '400px',
+      data: { student: studentUPD },
+    });
+
+    ref.afterClosed().subscribe((studentUp: IStudent) => {
+      if (studentUp) {
+        const list = this.studentData.getValue();
+        const postIndex = _.findIndex(list, (post) => post.id === studentUp.id);
+        list[postIndex] = studentUp;
 
         this.studentData.next(_.cloneDeep(list));
       }

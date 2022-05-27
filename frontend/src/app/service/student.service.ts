@@ -47,12 +47,12 @@ export class StudentService {
     );
   }
 
-  public addGroup(studentId: number, subjectId: number): Observable<IStudent> {
+  public addGroup(studentId: number, groupId: number): Observable<IStudent> {
     return this.http.post<IStudent>(
-      `${this.URL_STUDENT}/addSubjectToStudent/${studentId}/${subjectId}`,
+      `${this.URL_STUDENT}/addGroupToStudent/${studentId}/${groupId}`,
       {
         studentId,
-        subjectId,
+        groupId,
       }
     );
   }
