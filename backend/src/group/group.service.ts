@@ -31,6 +31,10 @@ export class GroupService {
     });
   }
 
+  async getGroupByValue(title: string): Promise<Group> {
+    return await this.groupRepository.findOne({ where: { title } });
+  }
+
   async search(query: string): Promise<Group[]> {
     return await this.groupRepository.find({
       where: { title: query },

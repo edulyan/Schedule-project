@@ -43,8 +43,10 @@ export class StudentService {
   async create(studentDto: CreateStudentDto): Promise<Student> {
     const student = this.studentRepository.create(studentDto);
     const role = await this.roleService.getRoleByValue('USER');
+    const group = await this.groupService.getGroupByValue('none');
 
     student.role = role;
+    student.group = group;
     return await this.studentRepository.save(student);
   }
 
