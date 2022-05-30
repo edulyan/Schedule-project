@@ -95,6 +95,23 @@
         <!-- <td mat-cell *matCellDef="let element">{{ element.group | json }}</td> -->
       </ng-container>
 
+      <!-- ToSchedule Column -->
+      <ng-container matColumnDef="toSchedule">
+        <th mat-header-cell *matHeaderCellDef class="header-table"></th>
+        <td mat-cell *matCellDef="let element" class="field-table">
+          <button
+            mat-icon-button
+            (click)="toSchedule(element.id); $event.stopPropagation()"
+            aria-label="Delete post"
+          >
+            <mat-icon class="toSchedule-icon">calendar_today</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- [routerLink]="['/admin/schedule', element.id]" -->
+      <!-- (click)="delete(element); $event.stopPropagation()" -->
+
       <!-- Delete Column -->
       <ng-container matColumnDef="delete">
         <th mat-header-cell class="header-table" *matHeaderCellDef></th>
@@ -104,7 +121,7 @@
             (click)="delete(element); $event.stopPropagation()"
             aria-label="Delete post"
           >
-            <mat-icon>delete</mat-icon>
+            <mat-icon class="delete-icon">delete</mat-icon>
           </button>
         </td>
       </ng-container>

@@ -7,259 +7,299 @@
 </mat-paginator>
 
 <!-- First TABLE -->
+<div class="create-lesson-button">
+  <button mat-icon-button color="warn">
+    <mat-icon [inline]="true">add_box</mat-icon>
+  </button>
+</div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+<ng-container *ngIf="getLessons() | async as studentListItem">
+  <table
+    mat-table
+    [dataSource]="studentListItem"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Понедельник, 18.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Понедельник, 18.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.classroom }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <!-- <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container> -->
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Delete post">
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
 
-<!-- Second TABLE -->
+  <!-- Second TABLE -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+  <div class="create-lesson-button">
+    <button mat-icon-button color="warn">
+      <mat-icon [inline]="true">add_box</mat-icon>
+    </button>
+  </div>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Вторник, 19.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Вторник, 19.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.classroom }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <!-- <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container> -->
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          (click)="delete(element); $event.stopPropagation()"
+          aria-label="Delete post"
+        >
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
 
-<!-- Third TABLE -->
+  <!-- Third TABLE -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Среда, 20.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Среда, 20.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Delete post">
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
 
-<!-- Fourth TABLE -->
+  <!-- Fourth TABLE -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Четверг, 21.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Четверг, 21.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Delete post">
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
 
-<!-- Fifth TABLE -->
+  <!-- Fifth TABLE -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Пятница, 22.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Пятница, 22.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Delete post">
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
 
-<!-- Sixth TABLE -->
+  <!-- Sixth TABLE -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Время</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 demo-table"
+  >
+    <!-- Position Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Время</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="day-name">
-    <th mat-header-cell *matHeaderCellDef>Суббота, 23.04.22</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="day-name">
+      <th mat-header-cell *matHeaderCellDef>Суббота, 23.04.22</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-  <!-- Create Colomn -->
-  <ng-container matColumnDef="create">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Create post">
-        <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Create Colomn -->
+    <ng-container matColumnDef="create">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Create post">
+          <mat-icon class="create-icon" [inline]="true">add_box</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <!-- Delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Delete post">
-        <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Delete post">
+          <mat-icon class="delete-icon" [inline]="true">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-    mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="update()"
-  ></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="update()"
+    ></tr>
+  </table>
+</ng-container>

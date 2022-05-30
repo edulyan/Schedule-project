@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'admin/create/student', component: StudentTableComponent },
   { path: 'admin/create/subject', component: SubjectTableComponent },
   { path: 'admin/create/teacher', component: TeacherTableComponent },
-  { path: 'admin/schedule', component: AdminScheduleTableComponent },
+  { path: 'admin/schedule/:id', component: AdminScheduleTableComponent },
 ];
 
 @NgModule({

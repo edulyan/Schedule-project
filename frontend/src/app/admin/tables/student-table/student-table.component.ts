@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IStudent } from 'src/app/models/student/student.interface';
@@ -11,11 +10,7 @@ import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { IGroup } from 'src/app/models/group/group.interface';
 import { GroupService } from 'src/app/service/group.service';
 import { UpdateStudentGroupComponent } from './update-student-group/update-student-group.component';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-student',
@@ -26,7 +21,8 @@ export class StudentTableComponent implements OnInit {
   constructor(
     private studentService: StudentService,
     private groupService: GroupService,
-    public matDialog: MatDialog
+    public matDialog: MatDialog,
+    private router: Router
   ) {}
 
   private studentData = new BehaviorSubject<IStudent[]>([]);
@@ -49,6 +45,7 @@ export class StudentTableComponent implements OnInit {
     'email',
     'phone',
     'group',
+    'toSchedule',
     'delete',
   ];
 
@@ -138,5 +135,9 @@ export class StudentTableComponent implements OnInit {
         });
       }
     });
+  }
+
+  toSchedule(id: number) {
+    this.router.navigate(['/admin/schedule', id]);
   }
 }

@@ -4,7 +4,6 @@ import { ITeacher } from '../teacher/teacher.interface';
 
 export interface ILesson {
   id: number;
-  time: string;
   classroom: number;
   group: IGroup;
   subject: ISubject;

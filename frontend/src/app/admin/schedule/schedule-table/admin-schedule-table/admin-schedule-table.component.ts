@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as _ from 'lodash';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { ILesson } from 'src/app/models/lesson/lesson.interface';
 import { LessonService } from 'src/app/service/lesson.service';
-import { AdminScheduleUpdateComponent } from '../../schedule-update/admin-schedule-update/admin-schedule-update.component';
 
 export interface PeriodicElement {
   name: string;
@@ -36,19 +35,25 @@ export class AdminScheduleTableComponent implements OnInit {
 
   private lessonData = new BehaviorSubject<ILesson[]>([]);
 
+  public id_page = +document.location.href.slice(-1);
+
   ngOnInit(): void {
     this.lessonService
       .getAll()
       .subscribe((lessonListItem) => this.lessonData.next(lessonListItem));
   }
 
-  displayedColumns: string[] = ['time', 'day-name', 'create', 'delete'];
+  displayedColumns: string[] = ['time', 'day-name', 'delete'];
   dataSource = ELEMENT_DATA;
 
+  getLessons(): Observable<ILesson[]> {
+    return this.lessonData.asObservable();
+  }
+
   update() {
-    this.matDialog.open(AdminScheduleUpdateComponent, {
-      width: '400px',
-    });
+    // this.matDialog.open(AdminScheduleUpdateComponent, {
+    //   width: '400px',
+    // });
   }
 
   delete(lesson: ILesson) {

@@ -23,12 +23,13 @@ import { StudentUpdateModule } from './admin/update/student-update/student-updat
 import { SubjectUpdateModule } from './admin/update/subject-update/subject-update.module';
 import { TeacherUpdateModule } from './admin/update/teacher-update/teacher-update.module';
 import { AdminScheduleTableModule } from './admin/schedule/schedule-table/admin-schedule-table/admin-schedule-table.module';
-import { AdminScheduleUpdateModule } from './admin/schedule/schedule-update/admin-schedule-update/admin-schedule-update.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogModule } from './dialog/dialog.module';
 import { UpdateStudentGroupModule } from './admin/tables/student-table/update-student-group/update-student-group.module';
+import { LessonCreateModule } from './admin/schedule/schedule-create/lesson-create.module';
+import { LessonUpdateModule } from './admin/schedule/schedule-update/lesson-update.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,7 +56,8 @@ import { UpdateStudentGroupModule } from './admin/tables/student-table/update-st
     SubjectUpdateModule,
     TeacherUpdateModule,
     AdminScheduleTableModule,
-    AdminScheduleUpdateModule,
+    LessonCreateModule,
+    LessonUpdateModule,
     DialogModule,
     UpdateStudentGroupModule,
     MatToolbarModule,

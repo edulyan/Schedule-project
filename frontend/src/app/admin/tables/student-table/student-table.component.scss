@@ -70,6 +70,22 @@ table {
   padding-right: 16px;
 }
 
+.mat-column-toSchedule {
+  width: 3% !important;
+
+  .toSchedule-icon {
+    font-size: 30px;
+  }
+}
+
+.mat-column-delete {
+  width: 3% !important;
+
+  .delete-icon {
+    font-size: 30px;
+  }
+}
+
 .btn-update-group {
   background-color: rgb(223, 198, 54);
 }

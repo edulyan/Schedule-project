@@ -14,7 +14,7 @@ import { MatDialogRef } from '@angular/material/dialog';
         color="black-create"
         (click)="submit()"
       >
-        Продолжить
+        Удалить
       </button>
       <button mat-raised-button mat-dialog-close color="warn">Отменить</button>
     </div>`,
