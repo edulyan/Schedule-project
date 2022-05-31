@@ -6,10 +6,23 @@
         <mat-form-field class="w=200">
           <input
             type="text"
-            name="lastname"
+            name="title"
+            [(ngModel)]="newLessonModel.title"
+            matInput
+            placeholder="Title"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w=200">
+          <input
+            type="text"
+            name="classroom"
             [(ngModel)]="newLessonModel.classroom"
             matInput
-            placeholder="Lastname"
+            placeholder="Classroom"
             required
           />
         </mat-form-field>

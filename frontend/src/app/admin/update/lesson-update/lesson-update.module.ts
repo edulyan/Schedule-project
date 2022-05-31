@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { LessonUpdateComponent } from './lesson-update.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { SubjectCreateComponent } from './subject-create.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
@@ -13,8 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  exports: [SubjectCreateComponent],
-  declarations: [SubjectCreateComponent],
+  exports: [
+    LessonUpdateComponent,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatDialogModule,
+  ],
+  declarations: [LessonUpdateComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,6 +33,5 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatCardModule,
   ],
-  providers: [],
 })
-export class SubjectCreateModule {}
+export class LessonUpdateModule {}

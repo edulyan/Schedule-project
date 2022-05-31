@@ -20,10 +20,12 @@ export class LessonService {
     return this.http.get<ILesson>(`${this.URL_LESSON}/${id}`);
   }
 
+  public search(title: string): Observable<ILesson[]> {
+    return this.http.get<ILesson[]>(`${this.URL_LESSON}/search?query=` + title);
+  }
+
   public create(lesson: ICreateLesson): Observable<ILesson> {
-    return this.http.post<ILesson>(`${this.URL_LESSON}`, {
-      lesson,
-    });
+    return this.http.post<ILesson>(`${this.URL_LESSON}`, lesson);
   }
 
   public addGroup(lessonId: number, groupId: number): Observable<ILesson> {
@@ -56,10 +58,8 @@ export class LessonService {
     );
   }
 
-  public update(id: number, lesson: ICreateLesson): Observable<{}> {
-    return this.http.put<ILesson>(`${this.URL_LESSON}/${id}`, {
-      lesson,
-    });
+  public update(lesson: ILesson): Observable<ILesson> {
+    return this.http.put<ILesson>(`${this.URL_LESSON}`, lesson);
   }
 
   public remove(id: number): Observable<any> {

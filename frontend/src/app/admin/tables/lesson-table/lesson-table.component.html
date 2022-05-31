@@ -1,30 +1,30 @@
-<div class="main-header-subject">
-  <h1>ПРЕДМЕТЫ</h1>
+<div class="main-header-lesson">
+  <h1>ЗАНЯТИЯ</h1>
 </div>
 
-<div class="form-subject">
+<div class="form-lesson">
   <mat-form-field class="search">
-    <mat-label>Search</mat-label>
+    <mat-label>Поиск</mat-label>
     <input
       matInput
-      [ngModel]="subjects.title"
-      (ngModelChange)="searchGroup($event)"
+      [ngModel]="lessons.title"
+      (ngModelChange)="searchLessons($event)"
     />
   </mat-form-field>
 </div>
 
-<div class="main-table-subject">
-  <div class="create-subject-button">
+<div class="main-table-lesson">
+  <div class="create-lesson-button">
     <button mat-icon-button color="warn" (click)="create()">
       <mat-icon [inline]="true">add_box</mat-icon>
     </button>
   </div>
 
-  <ng-container *ngIf="getSubjects() | async as subjectListItem">
+  <ng-container *ngIf="getLessons() | async as lessonListItem">
     <table
       mat-table
-      [dataSource]="subjectListItem"
-      class="mat-elevation-z8 subject-table"
+      [dataSource]="lessonListItem"
+      class="mat-elevation-z8 lesson-table"
     >
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -41,12 +41,31 @@
         <td mat-cell *matCellDef="let element">{{ element.title }}</td>
       </ng-container>
 
-      <!-- Lessons Column -->
-      <ng-container matColumnDef="lessons">
-        <th mat-header-cell *matHeaderCellDef>Lessons</th>
+      <!-- Classroom Column -->
+      <ng-container matColumnDef="classroom">
+        <th mat-header-cell *matHeaderCellDef>Classroom</th>
+        <td mat-cell *matCellDef="let element">{{ element.classroom }}</td>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef>Group</th>
         <td mat-cell *matCellDef="let element">
           <mat-nav-list>
-            <mat-list-item *ngFor="let gr of element.lessons">
+            <mat-list-item *ngFor="let gr of element.group">
+              {{ [gr.firstname] }}
+              {{ [gr.lastname] }}
+            </mat-list-item>
+          </mat-nav-list>
+        </td>
+      </ng-container>
+
+      <!-- Teacher Column -->
+      <ng-container matColumnDef="teacher">
+        <th mat-header-cell *matHeaderCellDef>Teacher</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-nav-list>
+            <mat-list-item *ngFor="let gr of element.teacher">
               {{ [gr.classroom] }}
             </mat-list-item>
           </mat-nav-list>

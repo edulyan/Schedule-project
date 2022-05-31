@@ -13,7 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  exports: [LessonCreateComponent],
+  exports: [
+    LessonCreateComponent,
+    MatFormFieldModule,
+    MatProgressBarModule,
+    MatDialogModule,
+  ],
   declarations: [LessonCreateComponent],
   imports: [
     CommonModule,
