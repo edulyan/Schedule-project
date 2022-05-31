@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Subject } from '../../subject/entity/subject.entity';
 import { Group } from '../../group/entity/group.entity';
 import { Teacher } from '../../teacher/entity/teacher.entity';
 
@@ -9,13 +8,13 @@ export class Lesson {
   id: number;
 
   @Column()
+  title: string;
+
+  @Column()
   classroom: number;
 
   @ManyToOne(() => Group, (group) => group.lessons)
   group: Group;
-
-  @ManyToOne(() => Subject, (subject) => subject.lessons)
-  subject: Subject;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.lessons)
   teacher: Teacher;

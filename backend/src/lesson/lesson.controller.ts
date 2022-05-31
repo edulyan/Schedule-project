@@ -6,8 +6,10 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateLessonDto } from './dto/createLesson.dto';
+import { UpdateLessonDto } from './dto/updateLesson.dto';
 import { LessonService } from './lesson.service';
 
 @Controller('lesson')
@@ -17,6 +19,11 @@ export class LessonController {
   @Get()
   async getAll() {
     return await this.lessonService.getAll();
+  }
+
+  @Get('/search')
+  async search(@Query('query') query: string) {
+    return this.lessonService.search(query);
   }
 
   @Get(':id')
@@ -37,14 +44,6 @@ export class LessonController {
     return await this.lessonService.addGroup(teacherId, groupId);
   }
 
-  @Post('/addSubjectToLesson/:lessonId/:subjectId')
-  async addSubject(
-    @Param('lessonId') lessonId: number,
-    @Param('subjectId') subjectId: number,
-  ) {
-    return await this.lessonService.addSubject(lessonId, subjectId);
-  }
-
   @Post('/addTeacherToLesson/:lessonId/:teacherId')
   async addTeacher(
     @Param('lessonId') lessonId: number,
@@ -58,19 +57,14 @@ export class LessonController {
     return await this.lessonService.removeGroupAtLesson(id);
   }
 
-  @Put('/removeSubjectAtLesson/:id')
-  async removeSubjectAtLesson(@Param('id') id: number) {
-    return await this.lessonService.removeSubjectAtLesson(id);
-  }
-
   @Put('/removeTeacherAtLesson/:id')
   async removeTeacherAtLesson(@Param('id') id: number) {
     return await this.lessonService.removeTeacherAtLesson(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() lessonDto: CreateLessonDto) {
-    return await this.lessonService.update(id, lessonDto);
+  @Put()
+  async update(@Body() lessonDto: UpdateLessonDto) {
+    return await this.lessonService.update(lessonDto);
   }
 
   @Delete(':id')
