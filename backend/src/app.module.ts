@@ -7,9 +7,14 @@ import { ConfigPG } from './config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
 import { RoleModule } from './role/role.module';
 import { LessonModule } from './lesson/lesson.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     TypeOrmModule.forRoot(ConfigPG),
     StudentModule,
     TeacherModule,
