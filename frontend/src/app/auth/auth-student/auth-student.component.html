@@ -7,7 +7,7 @@
   window.getElementById("autoplay").play();
 </script> -->
 
-<form [formGroup]="formGroup" (submit)="signIn()">
+<form [formGroup]="formGroup" (submit)="signIn(2)">
   <div class="log-inputs">
     <div class="log-headers">
       <h1>Студент</h1>
@@ -54,7 +54,7 @@
         color="warn"
         [disabled]="formGroup.invalid"
         type="button"
-        (click)="signIn()"
+        (click)="signIn(2)"
       >
         Войти
       </button>

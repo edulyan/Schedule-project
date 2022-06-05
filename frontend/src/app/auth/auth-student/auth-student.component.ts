@@ -22,10 +22,10 @@ export class AuthStudentComponent implements OnInit {
     });
   }
 
-  public signIn(): void {
+  public signIn(id: number): void {
     this.authService
       .loginStudent(this.formGroup.value)
-      .subscribe(() => this.router.navigate(['/user/schedule']));
+      .subscribe(() => this.router.navigate(['/user/schedule', id]));
   }
 
   // public signIn(): void {
