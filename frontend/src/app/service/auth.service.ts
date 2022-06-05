@@ -57,4 +57,16 @@ export class AuthService {
       teacher
     );
   }
+
+  getToken(): any {
+    try {
+      return localStorage.getItem('token');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
 }

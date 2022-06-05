@@ -40,6 +40,9 @@ export class UpdateStudentGroupComponent implements OnInit {
   }
 
   updateStudentGroup(form: NgForm) {
+    console.log(this.updateGroupOfStudent.id);
+    console.log(this.updateGroupOfStudent.group.id);
+
     if (form.valid) {
       this.handleAfterCreate(
         this.studentService.addGroup(
