@@ -2,24 +2,43 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as _ from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { StudentUpdateComponent } from 'src/app/admin/update/student-update/student-update.component';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { ILesson } from 'src/app/models/lesson/lesson.interface';
+import { IStudent } from 'src/app/models/student/student.interface';
 import { LessonService } from 'src/app/service/lesson.service';
 
 export interface PeriodicElement {
-  name: string;
+  name?: string;
   time: string;
+  classroom?: string;
+  teacher?: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { time: '8:15 - 9:45', name: 'Hydrogen' },
-  { time: '09:55 - 11:25', name: 'Helium' },
-  { time: '11:50 - 13:20', name: 'Lithium' },
-  { time: '13:45 - 15:15', name: 'Beryllium' },
-  { time: '15:25 - 16:55', name: 'Boron' },
-  { time: '17:05 - 18:35', name: 'Carbon' },
-  { time: '18:55 - 20:25', name: 'Nitrogen' },
-  { time: '20:30 - 22:00', name: 'Oxygen' },
+const Monday: PeriodicElement[] = [
+  {
+    time: '8:15 - 9:45',
+    name: 'Математика',
+    classroom: '124',
+    teacher: 'Ольга Ивановна',
+  },
+  {
+    time: '09:55 - 11:25',
+    name: 'Английский язык',
+    classroom: '115',
+    teacher: 'Марина Николаевна',
+  },
+  {
+    time: '11:50 - 13:20',
+    name: 'Технический анализ',
+    classroom: '130',
+    teacher: 'Олег Олегович',
+  },
+  { time: '13:45 - 15:15', name: '', classroom: '', teacher: '' },
+  { time: '15:25 - 16:55', name: '', classroom: '', teacher: '' },
+  { time: '17:05 - 18:35', name: '', classroom: '', teacher: '' },
+  { time: '18:55 - 20:25', name: '', classroom: '', teacher: '' },
+  { time: '20:30 - 22:00', name: '', classroom: '', teacher: '' },
 ];
 
 @Component({
@@ -43,17 +62,30 @@ export class AdminScheduleTableComponent implements OnInit {
       .subscribe((lessonListItem) => this.lessonData.next(lessonListItem));
   }
 
-  displayedColumns: string[] = ['time', 'day-name', 'delete'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['time', 'day-name', 'create', 'delete'];
+  dataSource = Monday;
 
   getLessons(): Observable<ILesson[]> {
     return this.lessonData.asObservable();
   }
 
-  update() {
-    // this.matDialog.open(AdminScheduleUpdateComponent, {
-    //   width: '400px',
-    // });
+  update(lessonUPD: IStudent) {
+    const ref = this.matDialog.open(StudentUpdateComponent, {
+      width: '400px',
+      data: { student: lessonUPD },
+    });
+
+    ref.afterClosed().subscribe((editedStudent: IStudent) => {
+      if (editedStudent) {
+        const list = this.lessonData.getValue();
+        const postIndex = _.findIndex(
+          list,
+          (post) => post.id === editedStudent.id
+        );
+
+        this.lessonData.next(_.cloneDeep(list));
+      }
+    });
   }
 
   delete(lesson: ILesson) {

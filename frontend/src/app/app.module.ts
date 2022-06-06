@@ -28,6 +28,7 @@ import { UpdateStudentGroupModule } from './admin/tables/student-table/update-st
 import { LessonTableModule } from './admin/tables/lesson-table/lesson-table.module';
 import { LessonCreateModule } from './admin/create/lesson-create/lesson-create.module';
 import { LessonUpdateModule } from './admin/update/lesson-update/lesson-update.module';
+import { AdminScheduleUpdateModule } from './admin/schedule/admin-schedule-update/admin-schedule-update.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { LessonUpdateModule } from './admin/update/lesson-update/lesson-update.m
     LessonCreateModule,
     DialogModule,
     UpdateStudentGroupModule,
+    AdminScheduleUpdateModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
