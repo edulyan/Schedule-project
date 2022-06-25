@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { CreateGroupDto } from './dto/createGroup.dto';
 import { Group } from './entity/group.entity';
 import { UpdateGroupDto } from './dto/updateGroup.dto';
+const dottie = require('dottie');
 
 @Injectable()
 export class GroupService {
@@ -51,22 +52,6 @@ export class GroupService {
     return await this.groupRepository.save(group);
   }
 
-  // async removeGroupAtStudent(
-  //   groupId: number,
-  //   studentId: number,
-  // ): Promise<boolean> {
-  //   const group = await this.getById(groupId);
-  //   const student = await this.studentService.getById(studentId);
-
-  //   // let found = await group.students.find((x: any) => x.id == student.id);
-
-  //   // console.log(found);
-
-  //   await group.students.splice(groupId, 1);
-
-  //   return true;
-  // }
-
   async removeGroupAtStudent(
     groupId: number,
     studentId: number,
@@ -74,7 +59,11 @@ export class GroupService {
     const group = await this.getById(groupId);
     const student = await this.studentService.getById(studentId);
 
-    const found = await group.students.splice(student.id, 1);
+    const found = group.students.findIndex((x: any) => x.id == student.id);
+
+    group.students.splice(found, 1);
+
+    await this.groupRepository.save(group);
 
     return true;
   }
