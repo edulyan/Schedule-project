@@ -26,8 +26,8 @@ import { RolesGuard } from 'src/auth/roles.guard';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  // @Roles('ADMIN')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'USER')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   async getAll() {
     return this.studentService.getAll();
