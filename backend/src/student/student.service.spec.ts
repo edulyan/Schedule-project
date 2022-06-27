@@ -121,7 +121,7 @@ describe('StudentService', () => {
     const getStudents = await studentService.search('Oleg');
     console.log(getStudents);
 
-    expect(getStudents).toEqual(stackStudents[2]);
+    expect(getStudents).toEqual(stackStudents);
   });
 
   // it('Successfully create student', async () => {
